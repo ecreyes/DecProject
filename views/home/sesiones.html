@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sesionApp">
+<head>
+    <% include ../head %>
+    <script src="/js/sesionCtrl.js"></script>
+</head>
+
+<body ng-controller="sesionCtrl">
+<header>
+    <% include ../header %>
+</header>
+<div class="container">
+    <div class="row mt-5 pt-5">
+        <div class="col text-center">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-4">
+        <h2>Crear sesion</h2>
+        <form>
+            <div class="form-group">
+                <input type="text" class="form-control input-lg text-center" placeholder="Inserta un titulo" ng-model="formData.titulo">
+                <input type="text" class="form-control input-lg text-center" placeholder="Inserta un escenario" ng-model="formData.escenario">
+                <input type="text" class="form-control input-lg text-center" placeholder="Inserta una descripcion" ng-model="formData.descripcion">
+                <input type="text" class="form-control input-lg text-center" placeholder="Insertar miembros" ng-model="formData.miembros">
+            </div>
+            <button class="btn btn-primary btn-lg" ng-click="crearSesion()">
+                Añadir
+            </button>
+        </form>
+    </div>
+    <div class="col-4"></div>
+    <div class="col-4"></div>
+</div>
+
+<h1>Sesiones</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th> Titulo </th>
+        <th> escenario </th>
+        <th> descripcion </th>
+        <th> miembros </th>
+    </tr>
+    </thead>
+    <tbody ng-controller="sesionCtrl">
+    <tr ng-repeat="sesion in sesions">
+        <td>{{sesion.titulo}}</td>
+        <td>{{sesion.escenario}}</td>
+        <td>{{sesion.descripcion}}</td>
+        <td>{{sesion.miembros}}</td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+</body>
+
+<footer>
+    <% include ../footer %>
+</footer>
+</html>

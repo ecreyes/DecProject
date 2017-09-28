@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="timerApp">
+<head>
+    <% include ../head %>
+    <script src="/js/timerCtrl.js"></script>
+</head>
+
+<body>
+<header>
+    <% include ../header %>
+</header>
+<main>
+    <div class="container">
+        <div class="row mt-5 pt-5">
+            <div class="col text-center">
+            </div>
+        </div>
+    </div>
+
+    <div class="row" >
+        <div class="col-4"></div>
+        <div class="col-4">
+            <!--Panel-->
+            <div class="card">
+                <div class="card-header deep-orange lighten-1 white-text">
+                    Tiempo sala
+                </div>
+                <div class="card-body">
+                    <div ng-controller="counterCtrl">
+                        <input type="text" placeholder="Ingresar tiempo en segundos" ng-model="counter">
+                        <h4 class="card-title"><p ng-bind="counter"></p></h4>
+                        <button class="btn btn-deep-orange" ng-click="stop()">Stop</button>
+                        <button class="btn btn-primary" ng-click="countdown()">Start</button>
+                        <!--Angular Binding -->
+
+                    </div>
+                </div>
+            </div>
+            <!--/.Panel-->
+        </div>
+        <div class="col-4"></div>
+    </div>
+</main>
+
+
+</body>
+
+<footer>
+    <% include ../footer %>
+</footer>
+</html>

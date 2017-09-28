@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../head %>
+  </head>
+
+<body>
+<div class="container">
+    <div class="row mt-5 pt-5">
+        <div class="col text-center">
+        </div>
+    </div>
+</div>
+  <!-- Start your project here-->
+  <div style="height: 100vh">
+      <div class="row ">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+              <div class="container ">
+                  <div class="col-sm-12 col-sm-offset-3">
+                      <h1><span class="fa fa-sign-in"></span> Signup</h1>
+                      <!-- show any messages that come back with authentication -->
+                      <% if (message.length > 0) { %>
+                      <div class="alert alert-danger"><%= message %></div>
+                      <% } %>
+                      <!-- LOGIN FORM -->
+                      <form action="/signup" method="post">
+                          <div class="form-group">
+                              <label>Username</label>
+                              <input type="text" class="form-control" name="user">
+                          </div>
+                          <div class="form-group">
+                              <label>Email</label>
+                              <input type="text" class="form-control" name="email">
+                          </div>
+                          <div class="form-group">
+                              <label>Password</label>
+                              <input type="password" class="form-control" name="password">
+                          </div>
+
+                          <button type="submit" class="btn btn-default">Signup</button>
+                      </form>
+
+                      <hr>
+                      <p>Already have an account? <a href="/login">Login</a></p>
+                      <p>Or go <a href="/">home</a>.</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-3"></div>
+      </div>
+  </div>
+  <!-- /Start your project here-->
+
+</body>
+
+<footer>
+  <% include ../footer %>
+</footer>
+</html>
