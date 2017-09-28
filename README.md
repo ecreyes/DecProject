@@ -1,4 +1,4 @@
-# Proyecto MEAN
+# DECProject
 
 Para iniciar el proyecto:
 ```=
