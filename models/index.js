@@ -9,6 +9,7 @@ var Sequelize = require('sequelize');
 
 var Usuario= require('./usuario.js');
 var Sesion= require('./sesion.js');
+var Decision= require('./decision.js');
 
 var opts = {
     define: {

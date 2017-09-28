@@ -39,6 +39,7 @@ app.use(express.static('public'));
 //Routes
 app.use('/api', require('./router/api'));
 app.use('/apiSesion', require('./router/apiSesion'));
+app.use('/apiPanelAdmin', require('./router/apiPanelAdmin'));
 
 //Start Server
 models.sequelize.sync().then(function () {

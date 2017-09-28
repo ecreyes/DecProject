@@ -49,6 +49,10 @@ module.exports = function(app, passport) {
     app.get('/salas', function (req, res) {
         res.render('home/salas.html');
     });
+
+    app.get('/panelAdmin', function (req, res) {
+        res.render('admin/panelAdmin.html');
+    });
 }
 
 function isLoggedIn(req, res, next) {
