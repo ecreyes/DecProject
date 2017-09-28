@@ -9,4 +9,4 @@ Antes de arrancar el servidor se debe crear la bd con nombre "proyecto" y clave 
 Una vez configurada la bd, se inicia el servidor con:
 ```=
 node app.js
-``
+```
