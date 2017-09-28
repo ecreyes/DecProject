@@ -19,48 +19,67 @@
 <div class="row">
     <div class="col-4">
         <div class="container">
-            <h2>Crear sesion</h2>
-            <form>
-                <div class="form-group">
-                    <input type="text" class="form-control input-lg text-center" placeholder="Inserta un titulo" ng-model="formData.titulo">
-                    <input type="text" class="form-control input-lg text-center" placeholder="Inserta un escenario" ng-model="formData.escenario">
-                    <input type="text" class="form-control input-lg text-center" placeholder="Inserta una descripcion" ng-model="formData.descripcion">
-                    <input type="text" class="form-control input-lg text-center" placeholder="Insertar miembros" ng-model="formData.miembros">
+            <!--Panel-->
+            <div class="card text-center" style="width: 22rem;">
+                <div class="card-header primary-color white-text">
+                    Crear Sesión
                 </div>
-                <button class="btn btn-primary btn-lg" ng-click="crearSesion()">
-                    Añadir
-                </button>
-            </form>
+                <div class="card-body">
+                    <form>
+                        <div class="md-form">
+                            <input type="text" id="form1" class="form-control" ng-model="formData.titulo">
+                            <label for="form1" class="">Titulo</label>
+                        </div>
+                        <div class="md-form">
+                            <textarea id="textarea-char-counter" class="md-textarea" length="250" ng-model="formData.escenario"></textarea>
+                            <label for="textarea-char-counter">Escenario</label>
+                        </div>
+                        <div class="md-form">
+                            <textarea id="textarea-char-resultado" class="md-textarea" length="250" ng-model="formData.descripcion"></textarea>
+                            <label for="textarea-char-resultado">Descripción</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="text" id="form2" class="form-control" ng-model="formData.miembros">
+                            <label for="form2" class="">Miembros</label>
+                        </div>
+                        <button class="btn btn-default" ng-click="crearSesion()">Crear</button>
+                    </form>
+                </div>
+            </div>
+            <!--/.Panel-->
         </div>
     </div>
-    <div class="col-4"></div>
-    <div class="col-4"></div>
+    <div class="col-8">
+        <div class="container">
+            <!--Table-->
+            <table class="table">
+
+                <!--Table head-->
+                <thead class="default-color">
+                <tr class="text-white">
+                    <th> Titulo </th>
+                    <th> escenario </th>
+                    <th> descripcion </th>
+                    <th> miembros </th>
+                </tr>
+                </thead>
+                <!--Table head-->
+
+                <!--Table body-->
+                <tbody ng-controller="sesionCtrl">
+                <tr ng-repeat="sesion in sesions">
+                    <td>{{sesion.titulo}}</td>
+                    <td>{{sesion.escenario}}</td>
+                    <td>{{sesion.descripcion}}</td>
+                    <td>{{sesion.miembros}}</td>
+                </tr>
+                </tbody>
+                <!--Table body-->
+            </table>
+            <!--Table-->
+        </div>
+    </div>
 </div>
-
-<div class="container">
-
-</div>
-<h1>Sesiones</h1>
-<table class="table">
-    <thead>
-    <tr>
-        <th> Titulo </th>
-        <th> escenario </th>
-        <th> descripcion </th>
-        <th> miembros </th>
-    </tr>
-    </thead>
-    <tbody ng-controller="sesionCtrl">
-    <tr ng-repeat="sesion in sesions">
-        <td>{{sesion.titulo}}</td>
-        <td>{{sesion.escenario}}</td>
-        <td>{{sesion.descripcion}}</td>
-        <td>{{sesion.miembros}}</td>
-    </tr>
-    </tbody>
-</table>
-
-
 
 </body>
 

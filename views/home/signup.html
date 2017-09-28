@@ -16,36 +16,60 @@
       <div class="row ">
           <div class="col-md-3"></div>
           <div class="col-md-6">
-              <div class="container ">
-                  <div class="col-sm-12 col-sm-offset-3">
-                      <h1><span class="fa fa-sign-in"></span> Signup</h1>
-                      <!-- show any messages that come back with authentication -->
-                      <% if (message.length > 0) { %>
-                      <div class="alert alert-danger"><%= message %></div>
-                      <% } %>
-                      <!-- LOGIN FORM -->
-                      <form action="/signup" method="post">
-                          <div class="form-group">
-                              <label>Username</label>
-                              <input type="text" class="form-control" name="user">
-                          </div>
-                          <div class="form-group">
-                              <label>Email</label>
-                              <input type="text" class="form-control" name="email">
-                          </div>
-                          <div class="form-group">
-                              <label>Password</label>
-                              <input type="password" class="form-control" name="password">
+              <div class="container">
+                  <!--Form without header-->
+                  <div class="card">
+                      <div class="card-body">
+
+                          <!--Header-->
+                          <div class="text-center pink-text">
+                              <h3><i class="fa fa-pencil pink-text"></i> Registrarse</h3>
+                              <hr class="mt-2 mb-2">
                           </div>
 
-                          <button type="submit" class="btn btn-default">Signup</button>
-                      </form>
+                          <!--Body-->
+                          <!-- show any messages that come back with authentication -->
+                          <% if (message.length > 0) { %>
+                          <div class="alert alert-danger"><%= message %></div>
+                          <% } %>
+                          <br>
 
-                      <hr>
-                      <p>Already have an account? <a href="/login">Login</a></p>
-                      <p>Or go <a href="/">home</a>.</p>
+                          <form action="/signup" method="post">
+                          <!--Body-->
+                              <div class="md-form">
+                                  <i class="fa fa-user prefix grey-text"></i>
+                                  <input type="text" id="pinkForm-name" class="form-control" name="user">
+                                  <label for="pinkForm-name">Nombre usuario</label>
+                              </div>
+
+                              <div class="md-form">
+                                  <i class="fa fa-envelope prefix grey-text"></i>
+                                  <input type="text" id="pinkForm-email" class="form-control" name="email">
+                                  <label for="pinkForm-email">Correo</label>
+                              </div>
+
+                              <div class="md-form">
+                                  <i class="fa fa-lock prefix grey-text"></i>
+                                  <input type="password" id="cyanForm-pass" class="form-control" name="password">
+                                  <label for="cyanForm-pass">Contraseña</label>
+                              </div>
+
+                              <div class="text-center">
+                                  <button class="btn btn-pink">Registrar</button>
+                              </div>
+                          </form>
+                          <div class="modal-footer">
+                              <div class="options">
+                                  <p>¿Ya tienes una cuenta? <a href="/login">Iniciar Sesion.</a></p>
+                                  <p>ir a <a href="/">Inicio</a>.</p>
+                              </div>
+                          </div>
+
+                      </div>
                   </div>
+                  <!--/Form without header-->
               </div>
+
           </div>
           <div class="col-md-3"></div>
       </div>
