@@ -9,7 +9,9 @@ myModule.controller("counterCtrl",['$scope','$timeout', function($scope,$timeout
 
     //Adding initial value for counter
     //counter modelimiz için ilk değer atamasını yaptık.
-    $scope.counter;
+    $scope.counterSec;
+    $scope.counterMin;
+    $scope.counting = false ;
     var stopped;
 
 //timeout function
@@ -18,16 +20,33 @@ myModule.controller("counterCtrl",['$scope','$timeout', function($scope,$timeout
 //Cancels a task associated with the promise. As a result of this, the //promise will be resolved with a rejection.
     $scope.countdown = function() {
         stopped = $timeout(function() {
-            console.log($scope.counter);
-            $scope.counter--;
-            $scope.countdown();
+            console.log($scope.counterSec);
+            if( $scope.counterSec > 0 ) {
+                $scope.counterSec--;
+                $scope.countdown();
+            }
+            else if ($scope.counterSec === 0){
+                $scope.countdownMinute();
+            }
         }, 1000);
     };
+    $scope.countdownMinute = function() {
+        if($scope.counterMin > 0 ) {
+            $scope.counterMin--;
+            $scope.counterSec = 59;
+            $scope.countdown();
+        }
 
+    };
 
     $scope.stop = function(){
+        $scope.counting = false;
         $timeout.cancel(stopped);
+    }
 
+    $scope.timeButtom = function(){
+        $scope.counting = true;
+        $scope.countdown();
     }
 
 

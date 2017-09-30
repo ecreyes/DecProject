@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="timerApp">
+<html lang="en" ng-app="timerApp" >
+<!--  ng-app="salasApp" >  -->
 <head>
     <% include ../head %>
     <script src="/js/timerCtrl.js"></script>
+    <!-- <script src="/js/salasCtrl.js"></script> -->
 </head>
 
 <body>
@@ -26,19 +28,30 @@
                     Tiempo sala
                 </div>
                 <div class="card-body">
-                    <div ng-controller="counterCtrl">
-                        <input type="text" placeholder="Ingresar tiempo en segundos" ng-model="counter">
-                        <h4 class="card-title"><p ng-bind="counter"></p></h4>
-                        <button class="btn btn-deep-orange" ng-click="stop()">Stop</button>
-                        <button class="btn btn-primary" ng-click="countdown()">Start</button>
-                        <!--Angular Binding -->
+                    <div ng-controller="counterCtrl" class="ng-scope">
+                        <div ng-hide="counting">
+                            <div class="form-gruop row">
+                                <div class="col-xs-1">
+                                    <input type="text" placeholder="Ingresar  minutos" ng-model="counterMin">
+                                </div>
+                                <div class="col-xs-1">
+                                    <input type="text" placeholder="Ingresar segundos" ng-model="counterSec">
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" ng-click="timeButtom()">Start</button>
+                        </div>
+                        <div ng-show="counting">
+                            <h4 class="card-title">Tiempo {{counterMin}} : {{counterSec}}</h4>
+                            <button class="btn btn-deep-orange" ng-click="stop()">Stop</button>
+                        </div>
 
+
+                        <!--Angular Binding -->
                     </div>
                 </div>
             </div>
             <!--/.Panel-->
         </div>
-        <div class="col-4"></div>
     </div>
 </main>
 
