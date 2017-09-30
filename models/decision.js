@@ -7,17 +7,18 @@ module.exports = function(sequelize, DataTypes) {
         	unique: true,
         	allowNull: false
         },
+        idCreador: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'usuario',
+                key: 'id'
+            },
+            allowNull: false,
+        },
         mecanismo: DataTypes.TEXT,
         resultado: DataTypes.TEXT
-        //timestamps: false
  	}, {
-        /*classMethods: {
-        	associate: function(models){
-        		Sesion.hasMany(models.objetivos)
-        		Sesion.belongsToMany(models.usuario, {through: 'usuario_sesion'});
-        	}
 
-        }*/
         timestamps: false
     });
     return Decision;

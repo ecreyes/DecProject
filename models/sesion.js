@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
  	}, {
         classMethods: {
         	associate: function(models){
-        		Sesion.hasMany(models.objetivos)
+
         		Sesion.belongsToMany(models.usuario, {through: 'usuario_sesion'});
         	}
 

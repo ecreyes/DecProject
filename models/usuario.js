@@ -15,10 +15,12 @@ module.exports = function(sequelize, DataTypes) {
         	type: DataTypes.STRING,
         	unique: true,
         	allowNull: false
-        }
+        },
+        admin: DataTypes.BOOLEAN
     }, {
         classMethods: {
         	associate: function(models){
+                Usuario.hasMany(models.sesion, {foreignKey: 'idCreador'})
         		Usuario.belongsToMany(models.sesion, {through: 'usuario_sesion'});
         	}
 

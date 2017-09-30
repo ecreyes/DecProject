@@ -3,22 +3,28 @@
 module.exports = function(sequelize, DataTypes) {
     var Objetivos = 
     sequelize.define("objetivos", {
-    	/*foreign_id: {
+    	id: {
+    	    type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        idSesion: {
 		    type: DataTypes.INTEGER,
+            primaryKey: true,
 		    references: {
 		      model: 'sesion',
-		      key: 'id'
+              key: 'id'
+
 		    },
 		  	unique: true,
 		    allowNull: false,
-		    //foreignKey: true
-		},*/
+		},
         titulo: {
         	type: DataTypes.STRING,
         	unique: true,
         	allowNull: false
         },
-        descripcion: DataTypes.TEXT	
+        descripcion: DataTypes.TEXT
     });
     return Objetivos;
 };
