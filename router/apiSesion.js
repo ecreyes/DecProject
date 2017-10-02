@@ -25,16 +25,30 @@ router.post('/sesiones', function(req,res,next){
     try{
         console.log(req.body);
         var resultado=[];
-        models.sesion.create({
-            titulo: req.body.titulo,
-            escenario: req.body.escenario,
-            descripcion: req.body.descripcion,
-            miembros: req.body.miembros,
-            idCreador:req.user.id
-        }).then(function (sesions) {
-            resultado.push(sesions);
-            res.json(resultado);
-        });
+        if(req.user){
+            models.sesion.create({
+                titulo: req.body.titulo,
+                escenario: req.body.escenario,
+                descripcion: req.body.descripcion,
+                miembros: req.body.miembros,
+                idCreador:req.user.id
+            }).then(function (sesions) {
+                resultado.push(sesions);
+                res.json(resultado);
+            });
+        }else{
+            models.sesion.create({
+                titulo: req.body.titulo,
+                escenario: req.body.escenario,
+                descripcion: req.body.descripcion,
+                miembros: req.body.miembros,
+                idCreador:null
+            }).then(function (sesions) {
+                resultado.push(sesions);
+                res.json(resultado);
+            });
+        }
+
         //No se maneja bien el tema del JOIN aun asi que solo se agrega en la tabla sesion :/
 
         /*.then(function (sesions) {
