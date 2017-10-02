@@ -24,11 +24,13 @@ router.get('/panelAdmin', function(req, res, next) {
 router.post('/panelAdmin', function(req,res,next){
     try{
         console.log(req.body);
+        console.log(req.user);
         var resultado=[];
         models.decision.create({
             nombre: req.body.nombre,
             mecanismo: req.body.mecanismo,
-            resultado: req.body.resultado
+            resultado: req.body.resultado,
+            idCreador: req.user.id
         }).then(function (panelAdmins) {
             resultado.push(panelAdmins);
             res.json(resultado);

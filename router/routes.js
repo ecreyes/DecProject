@@ -5,7 +5,7 @@
 module.exports = function(app, passport) {
 
     app.get('/', function (req, res) {
-        res.render('home/index.html', {title: 'Mi primer Aplicacion Web'});
+        res.render('home/index.html');
     });
 
     app.get('/login', function(req, res) {
@@ -32,9 +32,18 @@ module.exports = function(app, passport) {
     }));
 
     app.get('/profile', isLoggedIn, function(req, res) {
-        res.render('usuario/profile.html', {
-            user : req.user // get the user out of session and pass to template
-        });
+        console.log(req.user);
+        if(req.user){
+            if(req.user.admin){
+                res.render('admin/panelAdmin.html',{
+                    user : req.user
+                });
+            }else{
+                res.render('usuario/profile.html',{
+                    user : req.user
+                });
+            }
+        }
     });
 
     app.get('/logout', function(req, res) {
@@ -50,9 +59,27 @@ module.exports = function(app, passport) {
         res.render('home/salas.html');
     });
 
-    app.get('/panelAdmin', function (req, res) {
-        res.render('admin/panelAdmin.html');
+    app.get('/salas/:id', function (req,res) {
+        res.redirect('/apiSesion/sesiones/'+req.params.id);
     });
+
+    app.get('/panelAdmin', function (req, res) {
+        if(req.user){
+            if(req.user.admin){
+                res.render('admin/panelAdmin.html',{
+                    user : req.user
+                });
+            }else{
+                res.render('home/index.html',{
+                });
+            };
+        }else{
+            res.render('home/index.html',{
+            });
+        }
+    });
+
+
 }
 
 function isLoggedIn(req, res, next) {

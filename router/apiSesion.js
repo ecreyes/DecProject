@@ -29,7 +29,8 @@ router.post('/sesiones', function(req,res,next){
             titulo: req.body.titulo,
             escenario: req.body.escenario,
             descripcion: req.body.descripcion,
-            miembros: req.body.miembros
+            miembros: req.body.miembros,
+            idCreador:req.user.id
         }).then(function (sesions) {
             resultado.push(sesions);
             res.json(resultado);
@@ -50,6 +51,23 @@ router.post('/sesiones', function(req,res,next){
     }
     catch(ex){
         console.error("Internal error:"+ex);
+        return next(ex);
+    }
+});
+
+router.get('/sesiones/:id', function(req, res, next) {
+    try {
+        console.log(req.params.id);
+        models.sesion.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(function (sesions) {
+            //res.json(sesions);
+            res.render('home/salas.html',{titulo: sesions.titulo,escenario: sesions.escenario,descripcion : sesions.descripcion,miembros: sesions.miembros});
+        });
+    } catch (ex) {
+        console.error("Internal error:" + ex);
         return next(ex);
     }
 });
