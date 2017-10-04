@@ -20,7 +20,6 @@
     <!-- Your custom styles (optional) -->
     <link href="../../css/style.css" rel="stylesheet">
     <script src="../../js/timerCtrl.js"></script>
-    <script src="../../js/objetivoCtrl.js"></script>
     <!-- <script src="/js/salasCtrl.js"></script> -->
 </head>
 
@@ -98,16 +97,17 @@
                         Agregar Objetivo
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form method="POST" action="/apiObjetivo/objetivos">
                             <div class="md-form">
-                                <input type="text" id="form1" class="form-control" ng-model="formData.titulo">
+                                <input type="text" id="form1" class="form-control" ng-model="formData.titulo" name="titulo">
                                 <label for="form1" class="">Titulo</label>
                             </div>
                             <div class="md-form">
-                                <textarea id="textarea-char-counter" class="md-textarea" length="250" ng-model="formData.descripcion"></textarea>
+                                <textarea id="textarea-char-counter" class="md-textarea" length="250" ng-model="formData.descripcion" name="descripcion"></textarea>
                                 <label for="textarea-char-counter">Descripción</label>
                             </div>
-                            <button class="btn btn-default" ng-click="crearObjetivo()">Crear</button>
+                            <input type="hidden" name="sala" value="<%=idSala%>" ng-model="formData.sala">
+                            <button class="btn btn-default" type="submit">Crear</button>
                         </form>
                     </div>
                 </div>

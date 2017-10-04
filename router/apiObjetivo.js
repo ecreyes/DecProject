@@ -28,7 +28,7 @@ router.post('/objetivos', function(req,res,next){
         models.objetivos.create({
             titulo: req.body.titulo,
             descripcion: req.body.descripcion,
-            idSesion: 1
+            idSesion: req.body.sala
         }).then(function (objectives) {
             resultado.push(objectives);
             res.json(resultado);
