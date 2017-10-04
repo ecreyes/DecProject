@@ -40,6 +40,7 @@ app.use(express.static('public'));
 app.use('/api', require('./router/api'));
 app.use('/apiSesion', require('./router/apiSesion'));
 app.use('/apiPanelAdmin', require('./router/apiPanelAdmin'));
+app.use('/apiObjetivo', require('./router/apiObjetivo'));
 
 //Start Server
 models.sequelize.sync().then(function () {

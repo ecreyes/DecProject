@@ -16,7 +16,6 @@ module.exports = function(sequelize, DataTypes) {
               key: 'id'
 
 		    },
-		  	unique: true,
 		    allowNull: false,
 		},
         titulo: {

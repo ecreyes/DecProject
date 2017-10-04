@@ -78,7 +78,7 @@ router.get('/sesiones/:id', function(req, res, next) {
             }
         }).then(function (sesions) {
             //res.json(sesions);
-            res.render('home/salas.html',{titulo: sesions.titulo,escenario: sesions.escenario,descripcion : sesions.descripcion,miembros: sesions.miembros});
+            res.render('home/salas.html',{titulo: sesions.titulo,escenario: sesions.escenario,descripcion : sesions.descripcion,miembros: sesions.miembros,idSala: req.params.id});
         });
     } catch (ex) {
         console.error("Internal error:" + ex);

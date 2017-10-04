@@ -20,6 +20,7 @@
     <!-- Your custom styles (optional) -->
     <link href="../../css/style.css" rel="stylesheet">
     <script src="../../js/timerCtrl.js"></script>
+    <script src="../../js/objetivoCtrl.js"></script>
     <!-- <script src="/js/salasCtrl.js"></script> -->
 </head>
 
@@ -43,6 +44,8 @@
                     <p class="lead"><%=escenario%></p>
                     <hr class="my-2">
                     <p><%=descripcion%>
+                    </p>
+                    <p><%=idSala%>
                     </p>
                     <a href="../../sesiones" class="btn btn-default btn-lg" role="button">Ver sesiones</a>
                 </div>
@@ -84,6 +87,32 @@
                 <!--/.Panel-->
             </div>
 
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4" >
+            <div class="container" ng-controller="objetivoCtrl">
+                <!--Panel-->
+                <div class="card text-center" style="width: 22rem;">
+                    <div class="card-header primary-color white-text">
+                        Agregar Objetivo
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="md-form">
+                                <input type="text" id="form1" class="form-control" ng-model="formData.titulo">
+                                <label for="form1" class="">Titulo</label>
+                            </div>
+                            <div class="md-form">
+                                <textarea id="textarea-char-counter" class="md-textarea" length="250" ng-model="formData.descripcion"></textarea>
+                                <label for="textarea-char-counter">Descripción</label>
+                            </div>
+                            <button class="btn btn-default" ng-click="crearObjetivo()">Crear</button>
+                        </form>
+                    </div>
+                </div>
+                <!--/.Panel-->
+            </div>
         </div>
     </div>
 </main>

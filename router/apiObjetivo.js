@@ -24,12 +24,11 @@ router.get('/objetivos', function(req, res, next) {
 router.post('/objetivos', function(req,res,next){
     try{
         console.log(req.body);
-        console.log(req.sesions);
         var resultado=[];
-        models.decision.create({
+        models.objetivos.create({
             titulo: req.body.titulo,
             descripcion: req.body.descripcion,
-            idSesion: req.sesions.id
+            idSesion: 1
         }).then(function (objectives) {
             resultado.push(objectives);
             res.json(resultado);
@@ -53,9 +52,5 @@ router.post('/objetivos', function(req,res,next){
         return next(ex);
     }
 });
-    catch(ex){
-        console.error("Internal error:"+ex);
-        return next(ex);
-    }
-});
+
 
