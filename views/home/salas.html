@@ -21,6 +21,7 @@
     <link href="../../css/style.css" rel="stylesheet">
     <script src="../../js/timerCtrl.js"></script>
     <!-- <script src="/js/salasCtrl.js"></script> -->
+    <title>Sala</title>
 </head>
 
 <body>
@@ -133,11 +134,14 @@
 
                     <!--Table body-->
                     <tbody>
-                    <tr ng-repeat="obj in objetivo">
-                        <td>{{obj.id}}</td>
-                        <td>{{obj.titulo}}</td>
-                        <td>{{obj.descripcion}}</td>
-                    </tr>
+                    <div>
+                            <tr ng-repeat="obj in objetivo">
+                            <td ng-if="obj.idSesion == '<%=idSala%>'">{{obj.id}}</td>
+                            <td ng-if="obj.idSesion == '<%=idSala%>'">{{obj.titulo}}</td>
+                            <td ng-if="obj.idSesion == '<%=idSala%>'">{{obj.descripcion}}</td>
+                            </tr>
+                    </div>
+
                     </tbody>
                     <!--Table body-->
                 </table>
@@ -146,7 +150,9 @@
         </div>
     </div>
 </main>
-
+<div ng-if="1 == 2">
+    <p> HOLA MUNDO</p>
+</div>
 
 </body>
 
