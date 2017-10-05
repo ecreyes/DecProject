@@ -53,10 +53,11 @@ myModule.controller("counterCtrl",['$scope','$timeout', function($scope,$timeout
 }]);
 
 myModule.controller("objetivoCtrl", function($scope,$http) {
+    $scope.objetivo = [];
     $scope.formData = {};
     $http.get('/apiObjetivo/objetivos')
         .success(function(data) {
-            $scope.sesions = data;
+            $scope.objetivo = data;
             console.log(data)
         })
         .error(function(data) {
@@ -65,8 +66,8 @@ myModule.controller("objetivoCtrl", function($scope,$http) {
     $scope.crearObjetivo = function(){
         $http.post('/apiObjetivo/objetivos', $scope.formData)
             .success(function(data) {
+                $scope.objetivo.push(data[0]);
                 $scope.formData = {};
-                $scope.todos = data;
                 console.log(data);
             })
             .error(function(data) {
