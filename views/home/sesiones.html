@@ -19,35 +19,35 @@
 <div class="row">
     <div class="col-4">
         <div class="container">
-            <!--Panel-->
-            <div class="card text-center" style="width: 22rem;">
-                <div class="card-header primary-color white-text">
-                    Crear Sesión
-                </div>
-                <div class="card-body">
-                    <form>
-                        <div class="md-form">
-                            <input type="text" id="form1" class="form-control" ng-model="formData.titulo">
-                            <label for="form1" class="">Titulo</label>
-                        </div>
-                        <div class="md-form">
-                            <textarea id="textarea-char-counter" class="md-textarea" length="250" ng-model="formData.escenario"></textarea>
-                            <label for="textarea-char-counter">Escenario</label>
-                        </div>
-                        <div class="md-form">
-                            <textarea id="textarea-char-resultado" class="md-textarea" length="250" ng-model="formData.descripcion"></textarea>
-                            <label for="textarea-char-resultado">Descripción</label>
-                        </div>
-                        <div class="md-form">
-                            <input type="text" id="form2" class="form-control" ng-model="formData.miembros">
-                            <label for="form2" class="">Miembros</label>
-                        </div>
-                        <button class="btn btn-default" ng-click="crearSesion()">Crear</button>
-                    </form>
-                </div>
+        <!--Panel-->
+        <div class="card text-center" style="width: 22rem;">
+            <div class="card-header primary-color white-text">
+                Crear Sesión
             </div>
-            <!--/.Panel-->
+            <div class="card-body">
+                <form>
+                    <div class="md-form">
+                        <input type="text" id="form1" class="form-control" ng-model="formData.titulo">
+                        <label for="form1" class="">Titulo</label>
+                    </div>
+                    <div class="md-form">
+                        <textarea id="textarea-char-counter" class="md-textarea" length="250" ng-model="formData.escenario"></textarea>
+                        <label for="textarea-char-counter">Escenario</label>
+                    </div>
+                    <div class="md-form">
+                        <textarea id="textarea-char-resultado" class="md-textarea" length="250" ng-model="formData.descripcion"></textarea>
+                        <label for="textarea-char-resultado">Descripción</label>
+                    </div>
+                    <div class="md-form">
+                        <input type="text" id="form2" class="form-control" ng-model="formData.miembros">
+                        <label for="form2" class="">Miembros</label>
+                    </div>
+                    <button class="btn btn-default" ng-click="crearSesion()">Crear</button>
+                </form>
+            </div>
         </div>
+        <!--/.Panel-->
+    </div>
     </div>
     <div class="col-8">
         <div class="container">

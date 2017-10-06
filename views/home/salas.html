@@ -37,7 +37,7 @@
     </div>
 
     <div class="row">
-        <div class="col-8">
+        <div class="col-4">
             <div class="container">
                 <div class="jumbotron">
                     <h1 class="h1-responsive"><%=titulo%></h1>
@@ -87,6 +87,30 @@
                 <!--/.Panel-->
             </div>
 
+        </div>
+        <div class="col-4">
+            <div class="container"  ng-controller="objetivoCtrl">
+                <!--Panel-->
+                <div class="card text-center" style="width: 22rem;">
+                    <div class="card-header primary-color white-text">
+                        Enviar invitación
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="md-form">
+                                <input type="text" id="input-email" class="form-control" ng-model="correo.email" name="email">
+                                <label for="input-email" class="">Correo</label>
+                            </div>
+                            <select ng-model="correo.sala" class="form-control" name="sala">
+                                <option value="" disabled selected>Selecciona la sala</option>
+                                <option value="<%=idSala%>"><%=idSala%></option>
+                            </select>
+                            <button class="btn btn-default"  ng-click="enviarCorreo()">Enviar</button>
+                        </form>
+                    </div>
+                </div>
+                <!--/.Panel-->
+            </div>
         </div>
     </div>
     <div class="row" ng-controller="objetivoCtrl">
@@ -151,10 +175,6 @@
         </div>
     </div>
 </main>
-<div ng-if="1 == 2">
-    <p> HOLA MUNDO</p>
-</div>
-
 </body>
 
 <footer>

@@ -1,6 +1,7 @@
 /**
  * Created by famancil on 21-08-16.
  */
+var nodemailer = require('nodemailer');
 
 module.exports = function(app, passport) {
 
@@ -30,6 +31,40 @@ module.exports = function(app, passport) {
         failureRedirect : '/signup', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
+    app.post('/sendemail', function(req,res,next){
+        try{
+            var email = req.body.email;
+            var sala = req.body.sala;
+            var smtpTransport = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 465,
+                secure: true,
+                auth: {
+                    user: "decproject2@gmail.com",
+                    pass: "analisis123"
+                }
+            });
+            var mailOptions = {
+                from: "DecProject", // sender address
+                to: email, // list of receivers
+                subject: "Invitación a sala", // Subject line
+                text: "Te invitaron a que te unas a http://localhost:3000/apiSesion/sesiones/" + sala // html body
+            }
+            smtpTransport.sendMail(mailOptions, function(error, response){
+                if(error){
+                    console.log("ocurrio un error, intentalo mas tarde");
+                }else{
+                    res.send("email enviado con exito");
+                }
+
+            });
+        }
+        catch(ex){
+            console.error("Internal error:"+ex);
+            return next(ex);
+        }
+    });
+
 
     app.get('/profile', isLoggedIn, function(req, res) {
         console.log(req.user);
@@ -77,6 +112,10 @@ module.exports = function(app, passport) {
             res.render('home/index.html',{
             });
         }
+    });
+
+    app.get('/nodemailer', function (req, res) {
+        res.render('home/nodemailer.html');
     });
 
 

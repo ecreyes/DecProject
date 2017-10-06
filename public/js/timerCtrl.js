@@ -74,4 +74,18 @@ myModule.controller("objetivoCtrl", function($scope,$http) {
                 console.log('Error:' + data);
             });
     };
+
+    $scope.correo = {};
+    $scope.enviarCorreo = function(){
+        $http.post('/sendemail', $scope.correo)
+            .success(function(data) {
+                alert("Correo enviado!");
+                $scope.correo = {};
+                console.log(data);
+            })
+            .error(function(data) {
+                console.log('Error:' + data);
+            });
+    };
+
 });

@@ -3,6 +3,7 @@ var ip = require('ip');
 var app = express();
 var bodyParser = require('body-parser');
 var path = require('path');
+var nodemailer = require("nodemailer");
 var mysql = require('mysql');
 var Usuario= require('./models/usuario.js');
 var models = require("./models/index.js");
