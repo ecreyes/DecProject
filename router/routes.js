@@ -114,11 +114,6 @@ module.exports = function(app, passport) {
         }
     });
 
-    app.get('/nodemailer', function (req, res) {
-        res.render('home/nodemailer.html');
-    });
-
-
 }
 
 function isLoggedIn(req, res, next) {
