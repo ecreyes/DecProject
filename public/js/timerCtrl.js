@@ -20,27 +20,32 @@ myModule.controller("counterCtrl",['$scope','$timeout', function($scope,$timeout
 //Cancels a task associated with the promise. As a result of this, the //promise will be resolved with a rejection.
     $scope.countdown = function() {
         stopped = $timeout(function() {
-            console.log($scope.counterSec);
+            //console.log("Countdown ");
             if( $scope.counterSec > 0 ) {
+                //console.log("if counterSec :" + $scope.counterSec);
                 $scope.counterSec--;
                 $scope.countdown();
             }
             else if ($scope.counterSec === 0){
                 $scope.countdownMinute();
-            }
+            }else console.log("ERROR ");
         }, 1000);
     };
     $scope.countdownMinute = function() {
         if($scope.counterMin > 0 ) {
+            //console.log("Minutes "+ $scope.counterMin);
             $scope.counterMin--;
             $scope.counterSec = 59;
             $scope.countdown();
+        }else{
+            console.log("TimeOff");
+            $scope.counting=false;
         }
-
     };
 
     $scope.stop = function(){
         $scope.counting = false;
+        console.log("Stop");
         $timeout.cancel(stopped);
     }
 
@@ -51,6 +56,8 @@ myModule.controller("counterCtrl",['$scope','$timeout', function($scope,$timeout
 
 
 }]);
+
+// Email Controller
 
 myModule.controller("objetivoCtrl", function($scope,$http) {
     $scope.objetivo = [];

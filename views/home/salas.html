@@ -61,19 +61,23 @@
                     </div>
                     <div class="card-body">
                         <div ng-controller="counterCtrl" class="ng-scope">
+
+                            <!--  Input Time -->
                             <div ng-hide="counting">
                                 <div class="md-form row">
                                     <div class="md-form">
-                                        <input type="text" id="pinkForm-name" class="form-control" ng-model="counterMin">
+                                        <input type="number" id="pinkForm-name" class="form-control" ng-model="counterMin">
                                         <label for="pinkForm-name">Ingresar minutos</label>
                                     </div>
                                     <div class="md-form">
-                                        <input type="text" id="pinkForm-name2" class="form-control" ng-model="counterSec">
+                                        <input type="number" max=60 id="pinkForm-name2" class="form-control" ng-model="counterSec">
                                         <label for="pinkForm-name2">Ingresar segundos</label>
                                     </div>
                                 </div>
                                 <button class="btn btn-default" ng-click="timeButtom()">Comenzar</button>
                             </div>
+
+                            <!-- Counting Time  -->
                             <div ng-show="counting">
                                 <h4 class="card-title">Tiempo {{counterMin}} : {{counterSec}}</h4>
                                 <button class="btn btn-secondary" ng-click="stop()">Detener</button>
