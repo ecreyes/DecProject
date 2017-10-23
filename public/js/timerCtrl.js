@@ -20,9 +20,7 @@ myModule.controller("counterCtrl",['$scope','$timeout', function($scope,$timeout
 //Cancels a task associated with the promise. As a result of this, the //promise will be resolved with a rejection.
     $scope.countdown = function() {
         stopped = $timeout(function() {
-            //console.log("Countdown ");
             if( $scope.counterSec > 0 ) {
-                //console.log("if counterSec :" + $scope.counterSec);
                 $scope.counterSec--;
                 $scope.countdown();
             }
@@ -33,24 +31,38 @@ myModule.controller("counterCtrl",['$scope','$timeout', function($scope,$timeout
     };
     $scope.countdownMinute = function() {
         if($scope.counterMin > 0 ) {
-            //console.log("Minutes "+ $scope.counterMin);
             $scope.counterMin--;
             $scope.counterSec = 59;
             $scope.countdown();
         }else{
-            console.log("TimeOff");
+            alert("¡¡Se acabó el tiempo!!");
             $scope.counting=false;
         }
     };
-
+    //Boton Detener
     $scope.stop = function(){
         $scope.counting = false;
         console.log("Stop");
         $timeout.cancel(stopped);
-    }
-
+    };
+    //Actualización del minutero y secundero
+    $scope.updateTime = function(){
+        if( $scope.counterSec >60) $scope.counterSec =59;
+        else if($scope.counterSec === 60){
+            $scope.counterSec = 0;
+            $scope.counterMin += 1;
+        }
+        else if($scope.counterSec < 0){
+            $scope.counterMin -= 1;
+            $scope.counterSec = 59;
+        }
+    };
+    // Boton Comenzar
     $scope.timeButtom = function(){
         $scope.counting = true;
+        if($scope.counterSec === (null || undefined ))$scope.counterSec = 0;
+        if($scope.counterMin === (null || undefined ))$scope.counterMin = 0;
+        console.log($scope.counterMin+" : "+$scope.counterSec);
         $scope.countdown();
     }
 

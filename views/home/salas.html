@@ -66,11 +66,12 @@
                             <div ng-hide="counting">
                                 <div class="md-form row">
                                     <div class="md-form">
-                                        <input type="number" id="pinkForm-name" class="form-control" ng-model="counterMin">
+                                        <input type="number" min=0 id="pinkForm-name" class="form-control" ng-model="counterMin">
                                         <label for="pinkForm-name">Ingresar minutos</label>
                                     </div>
                                     <div class="md-form">
-                                        <input type="number" max=60 id="pinkForm-name2" class="form-control" ng-model="counterSec">
+                                        <input type="number" min =-1 id="pinkForm-name2" class="form-control"
+                                               ng-change="updateTime()" ng-model="counterSec">
                                         <label for="pinkForm-name2">Ingresar segundos</label>
                                     </div>
                                 </div>
