@@ -1,199 +1,223 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="timerApp" >
-<!--  ng-app="salasApp" >  -->
+<!DOCTYPE HTML>
+<html lang="en" ng-app="timerApp">
 <head>
-    <!-- Bootstrap -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--<link rel="stylesheet" href="https://bootswatch.com/united/bootstrap.min.css">-->
+    <title>Salas</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../css/main.css" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js"></script>
-    <!-- MD Bootstrap -->
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="../../css/mdb.min.css" rel="stylesheet">
-    <!-- Your custom styles (optional) -->
-    <link href="../../css/style.css" rel="stylesheet">
     <script src="../../js/timerCtrl.js"></script>
-    <!-- <script src="/js/salasCtrl.js"></script> -->
-    <title>Sala</title>
 </head>
+<body class="subpage">
 
-<body>
-<header>
-    <% include ../header %>
+<!-- Header -->
+<header id="header">
+    <div class="logo"><a href="index.html">Dec <span>Project</span></a></div>
+    <a href="#menu">Menu</a>
 </header>
-<main>
-    <div class="container">
-        <div class="row mt-5 pt-5">
-            <div class="col text-center">
-            </div>
-        </div>
+
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/generic">Sesiones</a></li>
+        <li><a href="/login">Iniciar Sesión</a></li>
+        <li><a href="/signup">Registrarse</a></li>
+    </ul>
+</nav>
+
+<!-- One -->
+<section id="One" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+            <p>Accediste a la sala <%=idSala%></p>
+            <h2>Bienvenido</h2>
+        </header>
     </div>
+</section>
 
-    <div class="row">
-        <div class="col-4">
-            <div class="container">
-                <div class="jumbotron">
-                    <h1 class="h1-responsive"><%=titulo%></h1>
-                    <p class="lead"><%=escenario%></p>
-                    <hr class="my-2">
-                    <p><%=descripcion%>
-                    </p>
-                    <p><%=idSala%>
-                    </p>
-                    <a href="../../sesiones" class="btn btn-default btn-lg" role="button">Ver sesiones</a>
-                </div>
-            </div>
+<!-- Two -->
+<section id="two" class="wrapper style2">
+    <div class="inner">
+        <div class="box">
+            <div class="content">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="container">
+                            <!--Panel-->
+                            <div class="card">
+                                <div class="card-header secondary-color-dark lighten-1 white-text">
+                                    Tiempo sala
+                                </div>
+                                <div class="card-body">
+                                    <div ng-controller="counterCtrl" class="ng-scope">
 
-        </div>
-        <div class="col-4">
-            <div class="container">
-                <!--Panel-->
-                <div class="card">
-                    <div class="card-header secondary-color-dark lighten-1 white-text">
-                        Tiempo sala
-                    </div>
-                    <div class="card-body">
-                        <div ng-controller="counterCtrl" class="ng-scope">
+                                        <!--  Input Time -->
+                                        <div ng-hide="counting">
+                                            <div class="md-form row">
+                                                <div class="md-form">
+                                                    <label for="pinkForm-name">Ingresar minutos</label>
+                                                    <input type="number" min=0 id="pinkForm-name" class="form-control" ng-model="counterMin">
+                                                </div>
+                                                <div class="md-form">
+                                                    <label for="pinkForm-name2">Ingresar segundos</label>
+                                                    <input type="number" min =-1 id="pinkForm-name2" class="form-control"
+                                                           ng-change="updateTime()" ng-model="counterSec">
+                                                </div>
+                                            </div>
+                                            <p></p>
+                                            <button class="button special" ng-click="timeButtom()">Comenzar</button>
+                                        </div>
 
-                            <!--  Input Time -->
-                            <div ng-hide="counting">
-                                <div class="md-form row">
-                                    <div class="md-form">
-                                        <input type="number" min=0 id="pinkForm-name" class="form-control" ng-model="counterMin">
-                                        <label for="pinkForm-name">Ingresar minutos</label>
-                                    </div>
-                                    <div class="md-form">
-                                        <input type="number" min =-1 id="pinkForm-name2" class="form-control"
-                                               ng-change="updateTime()" ng-model="counterSec">
-                                        <label for="pinkForm-name2">Ingresar segundos</label>
+                                        <!-- Counting Time  -->
+                                        <div ng-show="counting">
+                                            <h4 class="card-title">Tiempo {{counterMin}} : {{counterSec}}</h4>
+                                            <button class="button special" ng-click="stop()">Detener</button>
+                                        </div>
+
+
+                                        <!--Angular Binding -->
                                     </div>
                                 </div>
-                                <button class="btn btn-default" ng-click="timeButtom()">Comenzar</button>
                             </div>
+                            <!--/.Panel-->
+                        </div>
 
-                            <!-- Counting Time  -->
-                            <div ng-show="counting">
-                                <h4 class="card-title">Tiempo {{counterMin}} : {{counterSec}}</h4>
-                                <button class="btn btn-secondary" ng-click="stop()">Detener</button>
+                    </div>
+                    <div class="col-4">
+                        <header class="align-center">
+                            <p><%=descripcion%></p>
+                            <h2><%=titulo%></h2>
+                            <a href="../../sesiones" class="button special">Regresar a Salas</a>
+                        </header>
+                    </div>
+                    <div class="col-4">
+                        <div class="container"  ng-controller="objetivoCtrl">
+                            <!--Panel-->
+                            <div class="card text-center">
+                                <div class="card-header secondary-color-dark white-text">
+                                    Enviar invitación
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="md-form">
+                                            <label for="input-email" class="">Correo</label>
+                                            <input type="text" id="input-email" class="form-control" ng-model="correo.email" name="email">
+                                        </div>
+                                        <p></p>
+                                        <select ng-model="correo.sala" class="form-control" name="sala">
+                                            <option value="" disabled selected>Selecciona la sala</option>
+                                            <option value="<%=idSala%>"><%=idSala%></option>
+                                        </select>
+                                        <p></p>
+                                        <button class="button special"  ng-click="enviarCorreo()">Enviar</button>
+                                    </form>
+                                </div>
                             </div>
-
-
-                            <!--Angular Binding -->
+                            <!--/.Panel-->
                         </div>
                     </div>
                 </div>
-                <!--/.Panel-->
-            </div>
 
-        </div>
-        <div class="col-4">
-            <div class="container"  ng-controller="objetivoCtrl">
-                <!--Panel-->
-                <div class="card text-center">
-                    <div class="card-header secondary-color-dark white-text">
-                        Enviar invitación
-                    </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="md-form">
-                                <input type="text" id="input-email" class="form-control" ng-model="correo.email" name="email">
-                                <label for="input-email" class="">Correo</label>
+            </div>
+            <div class="content">
+                <div class="row" ng-controller="objetivoCtrl">
+                    <div class="col-4" >
+                        <div class="container">
+                            <!--Panel-->
+                            <div class="card text-center" style="width: 22rem;">
+                                <div class="card-header primary-color white-text">
+                                    Agregar Objetivo
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="md-form">
+                                            <label for="form1" class="">Titulo</label>
+                                            <input type="text" id="form1" class="form-control" ng-model="formData.titulo" name="titulo">
+                                        </div>
+                                        <div class="md-form">
+                                            <label for="textarea-char-counter">Descripción</label>
+                                            <textarea id="textarea-char-counter" class="md-textarea" length="250" ng-model="formData.descripcion" name="descripcion"></textarea>
+                                        </div>
+                                        <p></p>
+                                        <select ng-model="formData.sala" class="form-control">
+                                            <option value="" disabled selected>Selecciona la sala</option>
+                                            <option value="<%=idSala%>"><%=idSala%></option>
+                                        </select>
+                                        <p></p>
+                                        <button class="button special" ng-click="crearObjetivo()">Crear</button>
+                                    </form>
+                                </div>
                             </div>
-                            <select ng-model="correo.sala" class="form-control" name="sala">
-                                <option value="" disabled selected>Selecciona la sala</option>
-                                <option value="<%=idSala%>"><%=idSala%></option>
-                            </select>
-                            <button class="btn btn-default"  ng-click="enviarCorreo()">Enviar</button>
-                        </form>
+                            <!--/.Panel-->
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="container">
+                            <!--Table-->
+                            <table class="table">
+
+                                <!--Table head-->
+                                <thead class="default-color">
+                                <tr class="text-white">
+                                    <th> id </th>
+                                    <th> Titulo </th>
+                                    <th> descripcion </th>
+                                </tr>
+                                </thead>
+                                <!--Table head-->
+
+                                <!--Table body-->
+                                <tbody>
+                                <div>
+                                    <tr ng-repeat="obj in objetivo">
+                                        <td ng-if="obj.idSesion == '<%=idSala%>'">{{obj.id}}</td>
+                                        <td ng-if="obj.idSesion == '<%=idSala%>'">{{obj.titulo}}</td>
+                                        <td ng-if="obj.idSesion == '<%=idSala%>'">{{obj.descripcion}}</td>
+                                    </tr>
+                                </div>
+
+                                </tbody>
+                                <!--Table body-->
+                            </table>
+                            <!--Table-->
+                        </div>
                     </div>
                 </div>
-                <!--/.Panel-->
+
             </div>
         </div>
     </div>
+</section>
 
-    <div class="row" ng-controller="objetivoCtrl">
-        <div class="col-4" >
-            <div class="container">
-                <!--Panel-->
-                <div class="card text-center" style="width: 22rem;">
-                    <div class="card-header primary-color white-text">
-                        Agregar Objetivo
-                    </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="md-form">
-                                <input type="text" id="form1" class="form-control" ng-model="formData.titulo" name="titulo">
-                                <label for="form1" class="">Titulo</label>
-                            </div>
-                            <div class="md-form">
-                                <textarea id="textarea-char-counter" class="md-textarea" length="250" ng-model="formData.descripcion" name="descripcion"></textarea>
-                                <label for="textarea-char-counter">Descripción</label>
-                            </div>
-                            <select ng-model="formData.sala" class="form-control">
-                                <option value="" disabled selected>Selecciona la sala</option>
-                                <option value="<%=idSala%>"><%=idSala%></option>
-                            </select>
-                            <button class="btn btn-default" ng-click="crearObjetivo()">Crear</button>
-                        </form>
-                    </div>
-                </div>
-                <!--/.Panel-->
-            </div>
-        </div>
-        <div class="col-8">
-            <div class="container">
-                <!--Table-->
-                <table class="table">
-
-                    <!--Table head-->
-                    <thead class="default-color">
-                    <tr class="text-white">
-                        <th> id </th>
-                        <th> Titulo </th>
-                        <th> descripcion </th>
-                    </tr>
-                    </thead>
-                    <!--Table head-->
-
-                    <!--Table body-->
-                    <tbody>
-                    <div>
-                            <tr ng-repeat="obj in objetivo">
-                            <td ng-if="obj.idSesion == '<%=idSala%>'">{{obj.id}}</td>
-                            <td ng-if="obj.idSesion == '<%=idSala%>'">{{obj.titulo}}</td>
-                            <td ng-if="obj.idSesion == '<%=idSala%>'">{{obj.descripcion}}</td>
-                            </tr>
-                    </div>
-
-                    </tbody>
-                    <!--Table body-->
-                </table>
-                <!--Table-->
-            </div>
-        </div>
+<!-- Footer -->
+<footer id="footer">
+    <div class="container">
+        <ul class="icons">
+            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+        </ul>
     </div>
-
-</main>
-</body>
-
-<footer>
-    <p class="text-center text-muted">© Copyright 2017 Project Dec</p>
-    <!-- SCRIPTS -->
-    <!-- JQuery -->
-    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="../../js/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="../../js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="../../js/mdb.min.js"></script>
+    <div class="copyright">
+        &copy; Untitled. All rights reserved.
+    </div>
 </footer>
+
+<!-- Scripts -->
+<script src="../../js/jquery.min.js"></script>
+<script src="../../js/jquery.scrollex.min.js"></script>
+<script src="../../js/skel.min.js"></script>
+<script src="../../js/util.js"></script>
+<script src="../../js/main.js"></script>
+
+</body>
 </html>

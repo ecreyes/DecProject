@@ -1,92 +1,153 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en" ng-app="sesionApp">
 <head>
-    <% include ../head %>
+    <title>Salas</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" >
+
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js"></script>
+    <!-- Bootstrap core CSS -->
     <script src="/js/sesionCtrl.js"></script>
 </head>
+<body class="subpage">
 
-<body ng-controller="sesionCtrl">
-<header>
-    <% include ../header %>
+<!-- Header -->
+<header id="header">
+    <div class="logo"><a href="index.html">Dec <span>Project</span></a></div>
+    <a href="#menu">Menu</a>
 </header>
-<div class="container">
-    <div class="row mt-5 pt-5">
-        <div class="col text-center">
-        </div>
-    </div>
-</div>
 
-<div class="row">
-    <div class="col-4">
-        <div class="container">
-        <!--Panel-->
-        <div class="card text-center" style="width: 22rem;">
-            <div class="card-header primary-color white-text">
-                Crear Sesión
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/sesiones">Salas</a></li>
+        <li><a href="/login">Iniciar Sesión</a></li>
+        <li><a href="/signup">Registrarse</a></li>
+    </ul>
+</nav>
+
+<!-- One -->
+<section id="One" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+            <p>Participa en alguna de nuestras salas</p>
+            <h2>Bienvenido a las Salas</h2>
+        </header>
+    </div>
+</section>
+
+<!-- Two -->
+<section id="two" class="wrapper style2">
+    <div class="inner">
+        <div class="box">
+            <div class="content">
+                <header class="align-center">
+                    <p>Listado de salas activas</p>
+                    <h2>Salas</h2>
+                </header>
+                <div class="row" ng-controller="sesionCtrl">
+                    <div class="col-4">
+                        <div class="container">
+                            <!--Panel-->
+                            <div class="card border-info mb-3" style="width: 22rem;">
+                                <div class="card-header">
+                                    Crear Sesión
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="md-form">
+                                            <label for="form1" class="">Titulo</label>
+                                            <input type="text" id="form1" class="form-control" ng-model="formData.titulo">
+                                        </div>
+                                        <div class="md-form">
+                                            <label for="textarea-char-counter">Escenario</label>
+                                            <textarea id="textarea-char-counter" class="md-textarea" length="250" ng-model="formData.escenario"></textarea>
+                                        </div>
+                                        <div class="md-form">
+                                            <label for="textarea-char-resultado">Descripción</label>
+                                            <textarea id="textarea-char-resultado" class="md-textarea" length="250" ng-model="formData.descripcion"></textarea>
+                                        </div>
+                                        <div class="md-form">
+                                            <label for="form2" >Miembros</label>
+                                            <input type="text" id="form2" class="form-control" ng-model="formData.miembros">
+                                        </div>
+                                        <p></p>
+                                        <div>
+                                            <button  type="button" class="btn btn-dark" ng-click="crearSesion()">Crear</button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                            <!--/.Panel-->
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="container">
+                            <!--Table-->
+                            <table class="table">
+
+                                <!--Table head-->
+                                <thead class="default-color">
+                                <tr class="text-white">
+                                    <th> Titulo </th>
+                                    <th> escenario </th>
+                                    <th> descripcion </th>
+                                    <th> miembros </th>
+                                    <th> </th>
+                                </tr>
+                                </thead>
+                                <!--Table head-->
+
+                                <!--Table body-->
+                                <tbody>
+                                <tr ng-repeat="sesion in sesions">
+                                    <td>{{sesion.titulo}}</td>
+                                    <td>{{sesion.escenario}}</td>
+                                    <td>{{sesion.descripcion}}</td>
+                                    <td>{{sesion.miembros}}</td>
+                                    <td><a href="/salas/{{sesion.id}}" class="button special">Entrar</a></td>
+                                </tr>
+                                </tbody>
+                                <!--Table body-->
+                            </table>
+                            <!--Table-->
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <form>
-                    <div class="md-form">
-                        <input type="text" id="form1" class="form-control" ng-model="formData.titulo">
-                        <label for="form1" class="">Titulo</label>
-                    </div>
-                    <div class="md-form">
-                        <textarea id="textarea-char-counter" class="md-textarea" length="250" ng-model="formData.escenario"></textarea>
-                        <label for="textarea-char-counter">Escenario</label>
-                    </div>
-                    <div class="md-form">
-                        <textarea id="textarea-char-resultado" class="md-textarea" length="250" ng-model="formData.descripcion"></textarea>
-                        <label for="textarea-char-resultado">Descripción</label>
-                    </div>
-                    <div class="md-form">
-                        <input type="text" id="form2" class="form-control" ng-model="formData.miembros">
-                        <label for="form2" class="">Miembros</label>
-                    </div>
-                    <button class="btn btn-default" ng-click="crearSesion()">Crear</button>
-                </form>
-            </div>
-        </div>
-        <!--/.Panel-->
-    </div>
-    </div>
-    <div class="col-8">
-        <div class="container">
-            <!--Table-->
-            <table class="table">
-
-                <!--Table head-->
-                <thead class="default-color">
-                <tr class="text-white">
-                    <th> Titulo </th>
-                    <th> escenario </th>
-                    <th> descripcion </th>
-                    <th> miembros </th>
-                    <th> </th>
-                </tr>
-                </thead>
-                <!--Table head-->
-
-                <!--Table body-->
-                <tbody>
-                <tr ng-repeat="sesion in sesions">
-                    <td>{{sesion.titulo}}</td>
-                    <td>{{sesion.escenario}}</td>
-                    <td>{{sesion.descripcion}}</td>
-                    <td>{{sesion.miembros}}</td>
-                    <td><a href="/salas/{{sesion.id}}" class="btn btn-indigo">Entrar</a></td>
-                </tr>
-                </tbody>
-                <!--Table body-->
-            </table>
-            <!--Table-->
         </div>
     </div>
-</div>
+</section>
 
+<!-- Footer -->
+<footer id="footer">
+    <div class="container">
+        <ul class="icons">
+            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+        </ul>
+    </div>
+    <div class="copyright">
+        &copy; Untitled. All rights reserved.
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.scrollex.min.js"></script>
+<script src="js/skel.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/main.js"></script>
 
 </body>
-
-<footer>
-    <% include ../footer %>
-</footer>
 </html>
