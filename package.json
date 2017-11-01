@@ -27,7 +27,7 @@
     "passport-twitter": "~1.0.4",
     "promise-mysql": "^3.1.0",
     "sequelize": "^3.24.0",
-    "socket.io": "^2.0.3"
+    "socket.io": "*"
   },
   "author": "Ayudantes ASDW/FISW 2016-2",
   "license": "ISC"

@@ -105,6 +105,9 @@ module.exports = function(app, passport) {
         res.render('usuario/profile.html');
     });
 
+    app.get('/chat', function(req, res) {
+        res.render('home/chat.html');
+    });
 
 }
 

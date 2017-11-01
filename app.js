@@ -1,4 +1,6 @@
 var express = require('express');
+var http = require('http');
+var socket = require('socket.io');
 var ip = require('ip');
 var app = express();
 var bodyParser = require('body-parser');
@@ -43,12 +45,49 @@ app.use('/apiSesion', require('./router/apiSesion'));
 app.use('/apiPanelAdmin', require('./router/apiPanelAdmin'));
 app.use('/apiObjetivo', require('./router/apiObjetivo'));
 
+
+var servidor = http.createServer(app);
+
 //Start Server
 models.sequelize.sync().then(function () {
-	var server = app.listen(3000, function () {
+	var server = servidor.listen(3000, function () {
 		var host = ip.address();
 		var port = server.address().port;
 		console.log('Example app listening at http://%s:%s', host, port);
 	});
 });
+
+var io = socket.listen(servidor);
+
+var usuarios = [];
+io.on('connection', function(socket){
+    socket.on('nuevo usuario', function(usuario, callback){
+        if(usuarios.indexOf(usuario) != -1){
+            callback(false);
+        }
+        else{
+            callback(true);
+            socket.usuario = usuario;
+            usuarios.push(usuario);
+            actualizarUsuarios();
+            io.emit('mensaje',{mensaje: 'se ha conectado', usuario: socket.usuario});
+        }
+    });
+
+    socket.on('nuevo mensaje', function(mensaje){
+        io.emit('mensaje', {mensaje: mensaje, usuario: socket.usuario});
+    });
+
+    function actualizarUsuarios(){
+        io.emit('actualizarUsuarios', usuarios);
+    };
+
+    socket.on('disconnect', function(data){
+        usuarios.splice(usuarios.indexOf(socket.usuario), 1);
+        io.emit('mensaje',{mensaje: 'se ha desconectado', usuario: socket.usuario});
+        actualizarUsuarios();
+    });
+
+
+})
 

@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Generic</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" >
+
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js"></script>
+    <!-- Bootstrap core CSS -->
+
+    <style>
+        #seccionPrincipal {
+            display: none;
+        }
+
+
+        #ventanaChat {
+            height: 400px;
+        }
+
+        #seccionUsuarios {
+            float: left;
+            padding: 10px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body class="subpage">
+
+<!-- Header -->
+<header id="header">
+    <div class="logo"><a href="index.html">Dec <span>Project</span></a></div>
+    <a href="#menu">Menu</a>
+</header>
+
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/sesiones">Salas</a></li>
+        <li><a href="/loginInvitado">Entrar como Invitado</a></li>
+        <li><a href="/login">Iniciar Sesión</a></li>
+        <li><a href="/signup">Registrarse</a></li>
+        <li><a href="/loginAdmin">Entrar como administrador</a></li>
+    </ul>
+</nav>
+
+<!-- One -->
+<section id="One" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+            <p>Participa en alguna de nuestras salas</p>
+            <h2>Bienvenido a las Salas</h2>
+        </header>
+    </div>
+</section>
+
+<!-- Two -->
+<section id="two" class="wrapper style2">
+    <div class="inner">
+        <div class="box">
+            <div class="content">
+                <header class="align-center">
+                    <p>Listado de salas activas</p>
+                    <h2>Salas</h2>
+                </header>
+                <div class="container">
+                    <div class="row">
+                        <class class="col-12">
+                            <div id="seccionUsuario" class="jumbotron">
+                                <p>Escriba un nombre de usuario:</p>
+                                <div id="error" class="alert alert-warning" style="display:none;"></div>
+                                <form id="formularioUsuario">
+                                    <div class="input-group">
+                                        <input id="usuario" class="form-control" placeholder="Nombre del Usuario">
+                                        <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Enviar</button>
+                    </span>
+                                    </div>
+                                </form>
+                            </div>
+                        </class>
+                    </div>
+                    <div class="row">
+                        <class class="col-12">
+                            <div id="seccionPrincipal">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <div id="seccionChat" class="jumbotron col-xs-10">
+                                            <div id="ventanaChat"></div>
+                                            <form id="formularioChat">
+                                                <div class="input-group">
+                                                    <input id="mensaje" class="form-control">
+                                                    <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button">Enviar</button>
+                        </span>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-2">
+                                        <div id="seccionUsuarios" class="jumbotron">
+                                            <h4>Usuarios</h4>
+                                            <div id="listaUsuarios"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </class>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="container">
+        <ul class="icons">
+            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+        </ul>
+    </div>
+    <div class="copyright">
+        &copy; Untitled. All rights reserved.
+    </div>
+</footer>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    $(function(){
+        var socket = io.connect();
+
+        var formularioUsuario = $("#formularioUsuario");
+        var formularioChat = $("#formularioChat");
+
+        var usuario = $("#usuario");
+        var listaUsuarios = $("#listaUsuarios");
+
+        var mensaje = $("#mensaje");
+        var chat = $("#ventanaChat");
+
+        formularioUsuario.submit(function(evento){
+            evento.preventDefault();
+            socket.emit('nuevo usuario', usuario.val(), function(data){
+                if(data){
+                    $('#error').hide();
+                    $('#seccionUsuario').hide();
+                    $('#seccionPrincipal').show();
+                }
+                else{
+                    $('#error').html('El nombre del usuario ya exite');
+                    $('#error').show();
+                }
+            });
+            usuario.val('');
+
+            socket.on('actualizarUsuarios', function(usuarios){
+                var html = '';
+
+                usuarios.forEach(function(usuario){
+                    html += usuario + '<br />';
+                });
+
+                listaUsuarios.html(html);
+            });
+
+            formularioChat.submit(function(evento){
+                evento.preventDefault();
+                socket.emit('nuevo mensaje', mensaje.val());
+                mensaje.val('');
+            });
+
+            socket.on('mensaje', function(data){
+                chat.append('<strong>' + data.usuario + '</strong> - ' + data.mensaje + '<br/>');
+            })
+        })
+    })
+
+</script>
+<!-- Scripts -->
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.scrollex.min.js"></script>
+<script src="js/skel.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
