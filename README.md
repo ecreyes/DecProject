@@ -24,9 +24,9 @@ si todo funciona bien se deberian mostrar las tablas con:
 show tables;
 ```
 ## Crear administrador del sitio.
-Actualmente solo se permite registrar usuarios sin permisos de adminsitrador,para crear un usuario admin por consola:
+Actualmente solo se permite registrar usuarios sin permisos de adminisitrador,para crear el primer usuario admin por consola:
 ```=
-insert into usuario (id,username,password,email,admin,createdAt,updatedAt) values (1,"dec",123,"dec@email.cl",true,0000-00-00,0000-00-00);
+insert into admin values(1,'dec','111','00:00:00','00:00:00');
 ```
 El beneficio de esto es que en la barra de navegación aparece una rueda, si uno inicia sesion como administrador puede entrar a esa pestaña y agregar más decisiones de las que estan en la plantilla de excel.
 
