@@ -11,7 +11,7 @@ module.exports = router;
 //GET objetivos
 router.get('/objetivos', function(req, res, next) {
     try {
-        models.objetivos.findAll().then(function (objectives) {
+        models.escenario.findAll().then(function (objectives) {
             res.json(objectives);
         });
     } catch (ex) {
@@ -25,7 +25,7 @@ router.post('/objetivos', function(req,res,next){
     try{
         console.log(req.body);
         var resultado=[];
-        models.objetivos.create({
+        models.escenario.create({
             titulo: req.body.titulo,
             descripcion: req.body.descripcion,
             idSesion: req.body.sala

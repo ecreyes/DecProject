@@ -28,6 +28,7 @@
     <ul class="links">
         <li><a href="/">Inicio</a></li>
         <li><a href="/sesiones">Salas</a></li>
+        <li><a href="/loginInvitado">Entrar como Invitado</a></li>
         <li><a href="/login">Iniciar Sesión</a></li>
         <li><a href="/signup">Registrarse</a></li>
     </ul>
@@ -67,10 +68,6 @@
                                             <input type="text" id="form1" class="form-control" ng-model="formData.titulo">
                                         </div>
                                         <div class="md-form">
-                                            <label for="textarea-char-counter">Escenario</label>
-                                            <textarea id="textarea-char-counter" class="md-textarea" length="250" ng-model="formData.escenario"></textarea>
-                                        </div>
-                                        <div class="md-form">
                                             <label for="textarea-char-resultado">Descripción</label>
                                             <textarea id="textarea-char-resultado" class="md-textarea" length="250" ng-model="formData.descripcion"></textarea>
                                         </div>
@@ -98,7 +95,6 @@
                                 <thead class="default-color">
                                 <tr class="text-white">
                                     <th> Titulo </th>
-                                    <th> escenario </th>
                                     <th> descripcion </th>
                                     <th> miembros </th>
                                     <th> </th>
@@ -110,10 +106,9 @@
                                 <tbody>
                                 <tr ng-repeat="sesion in sesions">
                                     <td>{{sesion.titulo}}</td>
-                                    <td>{{sesion.escenario}}</td>
                                     <td>{{sesion.descripcion}}</td>
                                     <td>{{sesion.miembros}}</td>
-                                    <td><a href="/salas/{{sesion.id}}" class="button special">Entrar</a></td>
+                                    <td><a href="/salas/{{sesion.idSesion}}" class="button special">Entrar</a></td>
                                 </tr>
                                 </tbody>
                                 <!--Table body-->

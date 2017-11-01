@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../head %>
+</head>
+<body>
+
+<div class="container">
+    <div class="row mt-5 pt-5">
+        <div class="col text-center">
+        </div>
+    </div>
+</div>
+<div style="height: 100vh">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="container">
+                <!--Form without header-->
+                <div class="card">
+                    <div class="card-body">
+                        <!--Header-->
+                        <div class="text-center cyan-text">
+                            <h3><i class="fa fa-lock cyan-text"></i> Participar como invitado:</h3>
+                            <hr class="my-4">
+                        </div>
+
+                        <!--Body-->
+                        <form action="/signup" method="post">
+                            <div class="md-form">
+                                <i class="fa fa-envelope prefix grey-text"></i>
+                                <input type="text" id="cyanForm-name" class="form-control" name="email">
+                                <input type="hidden" name="password" value="0">
+                                <label for="cyanForm-name">Nombre invitado</label>
+                            </div>
+
+                            <div class="text-center">
+                                <button type ="submit" class="btn btn-info">Entrar como Invitado</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <!--Footer-->
+                    <div class="modal-footer">
+                        <div class="options">
+                            <p>¿Necesitas una cuenta? <a href="/signup">Registrate</a></p>
+                            <p>ir a <a href="/">Inicio</a>.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+<!-- /Start your project here-->
+
+</body>
+
+
+
+
+
+
+<footer>
+    <% include ../footer %>
+</footer>
+</html>

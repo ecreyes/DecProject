@@ -1,51 +1,50 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-    var Votos =
-        sequelize.define("votos", {
-            /*
-            idUsuario: {
+    var Usuario_escenario = sequelize.define("usuario_escenario", {
+    	/*idUsuario: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 references: {
-                    model: 'usuario_escenario',
+                    model: 'usuario',
                     key: 'idUsuario'
 
                 },
                 unique: true,
                 allowNull: false,
             },
-            idEscenario: {
+        idEscenario: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 references: {
-                    model: 'usuario_escenario',
+                    model: 'escenario',
                     key: 'idEscenario'
 
                 },
                 unique: true,
                 allowNull: false,
             },
-
-            idDecision: {
+        idSesion: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 references: {
-                    model: 'decision',
-                    key: 'id'
+                    model: 'escenario',
+                    key: 'idSesion'
 
                 },
                 unique: true,
                 allowNull: false,
             },*/
-            prioridad: {
-                type: DataTypes.INTEGER,
-                allowNull: false
+        
+    }, {
+    	 classMethods: {
+            associate: function(models){
+                //Usuario.hasMany(models.sesion, {foreignKey: 'idModerador'})
+                Usuario_escenario.belongsToMany(models.decision, {through: 'votos'});
             }
 
-        }, {
-
-            timestamps: false
-        });
-    return Votos;
+        },
+        timestamps: true
+    });
+    return Usuario_escenario;
 };

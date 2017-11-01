@@ -27,7 +27,8 @@
 <nav id="menu">
     <ul class="links">
         <li><a href="/">Inicio</a></li>
-        <li><a href="/generic">Sesiones</a></li>
+        <li><a href="/sesiones">Salas</a></li>
+        <li><a href="/loginInvitado">Entrar como Invitado</a></li>
         <li><a href="/login">Iniciar Sesión</a></li>
         <li><a href="/signup">Registrarse</a></li>
     </ul>
@@ -37,7 +38,7 @@
 <section id="One" class="wrapper style3">
     <div class="inner">
         <header class="align-center">
-            <p>Accediste a la sala <%=idSala%></p>
+            <p>Accediste a la sala <%=idSesion%></p>
             <h2>Bienvenido</h2>
         </header>
     </div>
@@ -114,7 +115,7 @@
                                         <p></p>
                                         <select ng-model="correo.sala" class="form-control" name="sala">
                                             <option value="" disabled selected>Selecciona la sala</option>
-                                            <option value="<%=idSala%>"><%=idSala%></option>
+                                            <option value="<%=idSesion%>"><%=idSesion%></option>
                                         </select>
                                         <p></p>
                                         <button class="button special"  ng-click="enviarCorreo()">Enviar</button>
@@ -134,7 +135,7 @@
                             <!--Panel-->
                             <div class="card text-center" style="width: 22rem;">
                                 <div class="card-header primary-color white-text">
-                                    Agregar Objetivo
+                                    Agregar Escenario
                                 </div>
                                 <div class="card-body">
                                     <form>
@@ -149,7 +150,7 @@
                                         <p></p>
                                         <select ng-model="formData.sala" class="form-control">
                                             <option value="" disabled selected>Selecciona la sala</option>
-                                            <option value="<%=idSala%>"><%=idSala%></option>
+                                            <option value="<%=idSesion%>"><%=idSesion%></option>
                                         </select>
                                         <p></p>
                                         <button class="button special" ng-click="crearObjetivo()">Crear</button>
@@ -178,9 +179,9 @@
                                 <tbody>
                                 <div>
                                     <tr ng-repeat="obj in objetivo">
-                                        <td ng-if="obj.idSesion == '<%=idSala%>'">{{obj.id}}</td>
-                                        <td ng-if="obj.idSesion == '<%=idSala%>'">{{obj.titulo}}</td>
-                                        <td ng-if="obj.idSesion == '<%=idSala%>'">{{obj.descripcion}}</td>
+                                        <td ng-if="obj.idSesion == '<%=idSesion%>'">{{obj.idEscenario}}</td>
+                                        <td ng-if="obj.idSesion == '<%=idSesion%>'">{{obj.titulo}}</td>
+                                        <td ng-if="obj.idSesion == '<%=idSesion%>'">{{obj.descripcion}}</td>
                                     </tr>
                                 </div>
 

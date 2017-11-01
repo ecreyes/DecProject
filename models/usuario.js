@@ -2,26 +2,33 @@
 
 module.exports = function(sequelize, DataTypes) {
     var Usuario = sequelize.define("usuario", {
+        idUsuario: {
+    	    type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+            allowNull: false,
+            unique: true
+        },
         username: {
         	type: DataTypes.STRING,
         	unique: true,
-        	allowNull: false
+        	allowNull: true
         },
         password: {
         	type: DataTypes.STRING,
-        	allowNull: false
+        	allowNull: true
         },
         email: {
         	type: DataTypes.STRING,
-        	unique: true,
-        	allowNull: false
+        	unique: false,
+        	allowNull: true
         },
-        admin: DataTypes.BOOLEAN
+        registrado: DataTypes.BOOLEAN
     }, {
         classMethods: {
         	associate: function(models){
-                Usuario.hasMany(models.sesion, {foreignKey: 'idCreador'})
-        		Usuario.belongsToMany(models.sesion, {through: 'usuario_sesion'});
+                //Usuario.hasMany(models.sesion, {foreignKey: 'idModerador'})
+                Usuario.belongsToMany(models.escenario, {through: 'votos'});
         	}
 
         }

@@ -32,15 +32,19 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-        done(null, user.id);
+        console.log("ME SALIO" +user.idUsuario);
+        done(null, user.idUsuario);
     });
 
     // used to deserialize the user
-    passport.deserializeUser(function(id, done) {
-        connection.query("select * from usuario where id = "+id,function(err,rows){
+    passport.deserializeUser(function(idUsuario, done) {
+        connection.query("select * from usuario where idUsuario = "+idUsuario,function(err,rows){
             done(err, rows[0]);
         });
     });
+
+
+
 
 
     // =========================================================================
@@ -49,7 +53,8 @@ module.exports = function(passport) {
     // we are using named strategies since we have one for login and one for signup
     // by default, if there was no name, it would just be called 'local'
 
-    passport.use('local-signup', new LocalStrategy({
+    passport.use('local-signup', new LocalStrategy(
+        {
             // by default, local strategy uses username and password, we will override with email
             usernameField : 'email',
             passwordField : 'password',
@@ -67,16 +72,32 @@ module.exports = function(passport) {
                 if (rows.length) {
                     return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
                 } else {
-                    var newUserMysql = new Object();
-                    models.usuario.create({
-                        username: req.body.user,
-                        password: password,
-                        email: email
-                    }).then(function (result) {
-                        console.log(result);
-                        newUserMysql.id = result.id;
-                        return done(null, newUserMysql);
-                    });
+                    if(password == 0){
+                        var newUserMysql = new Object();
+                        models.usuario.create({
+                            username: email,
+                            password: 0,
+                            email: 0,
+                            registrado: 0
+                        }).then(function (result) {
+                            console.log(result);
+                            newUserMysql.idUsuario = result.idUsuario;
+                            return done(null, newUserMysql);
+                        });
+                    }else{
+                        var newUserMysql = new Object();
+                        models.usuario.create({
+                            username: req.body.user,
+                            password: password,
+                            email: email,
+                            registrado: 1
+                        }).then(function (result) {
+                            console.log(result);
+                            newUserMysql.idUsuario = result.idUsuario;
+                            return done(null, newUserMysql);
+                        });
+                    }
+
                 }
             });
         }));

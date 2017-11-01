@@ -2,6 +2,7 @@
  * Created by famancil on 21-08-16.
  */
 var nodemailer = require('nodemailer');
+var models  = require('../models');
 
 module.exports = function(app, passport) {
 
@@ -13,6 +14,11 @@ module.exports = function(app, passport) {
         // render the page and pass in any flash data if it exists
         res.render('home/login.html', { message: req.flash('loginMessage') });
     });
+
+    app.get('/loginInvitado', function (req, res) {
+        res.render('home/loginInvitado.html');
+    });
+
 
     app.post('/login', passport.authenticate('local-login', {
         successRedirect : '/profile', // redirect to the secure profile section
@@ -31,6 +37,7 @@ module.exports = function(app, passport) {
         failureRedirect : '/signup', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
+
     app.post('/sendemail', function(req,res,next){
         try{
             var email = req.body.email;
