@@ -1,89 +1,199 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en" ng-app="panelAdminApp">
 <head>
-    <% include ../head %>
-    <script src="/js/panelAdminCtrl.js"></script>
-</head>
+    <title>Generic</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" >
 
-<body ng-controller="panelAdminCtrl">
-<header>
-    <% include ../header %>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js"></script>
+    <script src="/js/panelAdminCtrl.js"></script>
+    <!-- Bootstrap core CSS -->
+</head>
+<body class="subpage" ng-controller="panelAdminCtrl">
+
+<!-- Header -->
+<header id="header">
+    <div class="logo"><a href="index.html">Dec <span>Project</span></a></div>
+    <a href="#menu">Menu</a>
 </header>
 
-<main>
-    <div class="container">
-        <div class="row mt-5 pt-5">
-            <div class="col text-center">
-            </div>
-        </div>
-    </div>
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/sesiones">Salas</a></li>
+        <li><a href="/loginInvitado">Entrar como Invitado</a></li>
+        <li><a href="/login">Iniciar Sesión</a></li>
+        <li><a href="/signup">Registrarse</a></li>
+        <li><a href="/loginAdmin">Entrar como administrador</a></li>
+    </ul>
+</nav>
 
-    <div class="row" >
-        <div class="col-4">
-            <div class="container">
-                <!--Panel-->
-                <div class="card text-center" style="width: 22rem;">
-                    <div class="card-header primary-color white-text">
-                        Agregar decisión
+<!-- One -->
+<section id="One" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+            <p>Añade mas decisiones o crea nuevos administradores</p>
+            <h2>Bienvenido al Panel de administración</h2>
+        </header>
+    </div>
+</section>
+
+<!-- Two -->
+<section id="two" class="wrapper style2">
+    <div class="inner">
+        <div class="box">
+            <div class="content">
+                <header class="align-center">
+                    <p>Listado de decisiones creadas</p>
+                    <h2>Decisiones</h2>
+                </header>
+                <div class="row" >
+                    <div class="col-4">
+                        <div class="container">
+                            <!--Panel-->
+                            <div class="card text-center" style="width: 22rem;">
+                                <div class="card-header primary-color white-text">
+                                    Agregar decisión
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="md-form">
+                                            <label for="form1" class="">Nombre</label>
+                                            <input type="text" id="form1" class="form-control" ng-model="formData.nombre">
+                                        </div>
+                                        <div class="md-form">
+                                            <label for="textarea-char-counter">Mecanismo</label>
+                                            <textarea id="textarea-char-counter" class="md-textarea" length="250" ng-model="formData.mecanismo"></textarea>
+                                        </div>
+                                        <div class="md-form">
+                                            <label for="textarea-char-resultado">Resultado</label>
+                                            <textarea id="textarea-char-resultado" class="md-textarea" length="250" ng-model="formData.resultado"></textarea>
+                                        </div>
+                                        <button class="button btn-primary" ng-click="crearDecision()">Crear</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!--/.Panel-->
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="md-form">
-                                <input type="text" id="form1" class="form-control" ng-model="formData.nombre">
-                                <label for="form1" class="">Nombre</label>
-                            </div>
-                            <div class="md-form">
-                                <textarea id="textarea-char-counter" class="md-textarea" length="250" ng-model="formData.mecanismo"></textarea>
-                                <label for="textarea-char-counter">Mecanismo</label>
-                            </div>
-                            <div class="md-form">
-                                <textarea id="textarea-char-resultado" class="md-textarea" length="250" ng-model="formData.resultado"></textarea>
-                                <label for="textarea-char-resultado">Resultado</label>
-                            </div>
-                            <button class="btn btn-default" ng-click="crearDecision()">Crear</button>
-                        </form>
+                    <div class="col-8">
+                        <div class="container">
+                            <!--Table-->
+                            <table class="table">
+
+                                <!--Table head-->
+                                <thead class="primary-color">
+                                <tr class="text-white">
+                                    <th>#</th>
+                                    <th>Nombre</th>
+                                    <th>Mecanismo</th>
+                                    <th>Resultado</th>
+                                </tr>
+                                </thead>
+                                <!--Table head-->
+
+                                <!--Table body-->
+                                <tbody>
+                                <tr ng-repeat="panel in panelAdmins">
+                                    <th>{{panel.id}}</th>
+                                    <td>{{panel.nombre}}</td>
+                                    <td>{{panel.mecanismo}}</td>
+                                    <td>{{panel.resultado}}</td>
+                                </tr>
+                                </tbody>
+                                <!--Table body-->
+                            </table>
+                            <!--Table-->
+
+                        </div>
                     </div>
                 </div>
-                <!--/.Panel-->
-            </div>
+                <header class="align-center">
+                    <p>Listado de administradores creados</p>
+                    <h2>Administradores</h2>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="container">
+                                <!--Panel-->
+                                <div class="card text-center" style="width: 22rem;">
+                                    <div class="card-header primary-color white-text">
+                                        Registrar administrador
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="md-form">
+                                                <input type="text" id="form1-2" class="form-control" ng-model="formData2.username">
+                                                <label for="form1" class="">Username</label>
+                                            </div>
+                                            <div class="md-form">
+                                                <textarea id="textarea-char-counter-2" class="md-textarea" length="250" ng-model="formData2.password"></textarea>
+                                                <label type="password" for="textarea-char-counter">Contraseña</label>
+                                            </div>
+                                            <button class="button btn-info" ng-click="crearAdmin()">Registrar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!--/.Panel-->
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <table class="table">
 
-            </div>
-        <div class="col-8">
-            <div class="container">
-                <!--Table-->
-                <table class="table">
+                                <!--Table head-->
+                                <thead class="primary-color">
+                                <tr class="text-white">
+                                    <th>Admin Username</th>
+                                    <th>Contraseña</th>
+                                </tr>
+                                </thead>
+                                <!--Table head-->
 
-                    <!--Table head-->
-                    <thead class="primary-color">
-                    <tr class="text-white">
-                        <th>#</th>
-                        <th>Nombre</th>
-                        <th>Mecanismo</th>
-                        <th>Resultado</th>
-                    </tr>
-                    </thead>
-                    <!--Table head-->
-
-                    <!--Table body-->
-                    <tbody>
-                    <tr ng-repeat="panel in panelAdmins">
-                        <th>{{panel.id}}</th>
-                        <td>{{panel.nombre}}</td>
-                        <td>{{panel.mecanismo}}</td>
-                        <td>{{panel.resultado}}</td>
-                    </tr>
-                    </tbody>
-                    <!--Table body-->
-                </table>
-                <!--Table-->
+                                <!--Table body-->
+                                <tbody>
+                                <tr ng-repeat="panel2 in panelAdmins2">
+                                    <td>{{panel2.username}}</td>
+                                    <td>{{panel2.password}}</td>
+                                </tr>
+                                </tbody>
+                                <!--Table body-->
+                            </table>
+                        </div>
+                    </div>
+                </header>
             </div>
         </div>
     </div>
-</main>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="container">
+        <ul class="icons">
+            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+        </ul>
+    </div>
+    <div class="copyright">
+        &copy; Untitled. All rights reserved.
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.scrollex.min.js"></script>
+<script src="js/skel.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/main.js"></script>
 
 </body>
-
-<footer>
-    <% include ../footer %>
-</footer>
 </html>

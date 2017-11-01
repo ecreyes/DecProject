@@ -21,8 +21,8 @@ module.exports = function(app, passport) {
     app.get('/loginAdmin', function (req, res) {
         res.render('home/loginAdmin.html');
     });
-    app.get('/profileAdmin', function (req, res) {
-        res.render('admin/profileAdmin.html');
+    app.get('/panelAdmin', function (req, res) {
+        res.render('admin/panelAdmin.html');
     });
 
 
@@ -33,7 +33,7 @@ module.exports = function(app, passport) {
     }));
 
     app.post('/loginAdmin', passport.authenticate('admin-login', {
-        successRedirect : '/profileAdmin', // redirect to the secure profile section
+        successRedirect : '/panelAdmin', // redirect to the secure profile section
         failureRedirect : '/loginAdmin', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
@@ -85,21 +85,6 @@ module.exports = function(app, passport) {
     });
 
 
-    app.get('/profile', isLoggedIn, function(req, res) {
-        console.log(req.user);
-        if(req.user){
-            if(req.user.admin){
-                res.render('admin/panelAdmin.html',{
-                    user : req.user
-                });
-            }else{
-                res.render('usuario/profile.html',{
-                    user : req.user
-                });
-            }
-        }
-    });
-
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
@@ -117,21 +102,6 @@ module.exports = function(app, passport) {
         res.redirect('/apiSesion/sesiones/'+req.params.id);
     });
 
-    app.get('/panelAdmin', function (req, res) {
-        if(req.user){
-            if(req.user.admin){
-                res.render('admin/panelAdmin.html',{
-                    user : req.user
-                });
-            }else{
-                res.render('home/index.html',{
-                });
-            };
-        }else{
-            res.render('home/index.html',{
-            });
-        }
-    });
 
 }
 
