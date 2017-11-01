@@ -18,11 +18,23 @@ module.exports = function(app, passport) {
     app.get('/loginInvitado', function (req, res) {
         res.render('home/loginInvitado.html');
     });
+    app.get('/loginAdmin', function (req, res) {
+        res.render('home/loginAdmin.html');
+    });
+    app.get('/profileAdmin', function (req, res) {
+        res.render('admin/profileAdmin.html');
+    });
 
 
     app.post('/login', passport.authenticate('local-login', {
         successRedirect : '/profile', // redirect to the secure profile section
         failureRedirect : '/login', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
+
+    app.post('/loginAdmin', passport.authenticate('admin-login', {
+        successRedirect : '/profileAdmin', // redirect to the secure profile section
+        failureRedirect : '/loginAdmin', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
 

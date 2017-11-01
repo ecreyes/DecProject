@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="panelAdminApp">
+<head>
+    <script src="/js/panelAdminCtrl.js"></script>
+</head>
+
+<body ng-controller="panelAdminCtrl">
+
+
+<main>
+
+
+    <div class="row" >
+        <div class="col-4">
+            <div class="container">
+                <!--Panel-->
+                <div class="card text-center" style="width: 22rem;">
+                    <div class="card-header primary-color white-text">
+                        Agregar decisión
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="md-form">
+                                <input type="text" id="form1" class="form-control" ng-model="formData.nombre">
+                                <label for="form1" class="">Nombre</label>
+                            </div>
+                            <div class="md-form">
+                                <textarea id="textarea-char-counter" class="md-textarea" length="250" ng-model="formData.mecanismo"></textarea>
+                                <label for="textarea-char-counter">Mecanismo</label>
+                            </div>
+                            <div class="md-form">
+                                <textarea id="textarea-char-resultado" class="md-textarea" length="250" ng-model="formData.resultado"></textarea>
+                                <label for="textarea-char-resultado">Resultado</label>
+                            </div>
+                            <button class="btn btn-default" ng-click="crearDecision()">Crear</button>
+                        </form>
+                    </div>
+                </div>
+                <!--/.Panel-->
+            </div>
+
+            <div class="container">
+                <!--Panel-->
+                <div class="card text-center" style="width: 22rem;">
+                    <div class="card-header primary-color white-text">
+                        Registrar administrador
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="md-form">
+                                <input type="text" id="form1" class="form-control" ng-model="formData.username">
+                                <label for="form1" class="">Username</label>
+                            </div>
+                            <div class="md-form">
+                                <textarea id="textarea-char-counter" class="md-textarea" length="250" ng-model="formData.password"></textarea>
+                                <label for="textarea-char-counter">Contraseña</label>
+                            </div>
+                            <button class="btn btn-default" ng-click="crearAdmin()">Registrar</button>
+                        </form>
+                    </div>
+                </div>
+                <!--/.Panel-->
+            </div>
+
+            </div>
+        <div class="col-8">
+            <div class="container">
+                <!--Table-->
+                <table class="table">
+
+                    <!--Table head-->
+                    <thead class="primary-color">
+                    <tr class="text-white">
+                        <th>Nombre</th>
+                        <th>Mecanismo</th>
+                        <th>Resultado</th>
+                    </tr>
+                    </thead>
+                    <!--Table head-->
+
+                    <!--Table body-->
+                    <tbody>
+                    <tr ng-repeat="panel in panelAdmins">
+                        <td>{{panel.nombre}}</td>
+                        <td>{{panel.mecanismo}}</td>
+                        <td>{{panel.resultado}}</td>
+                    </tr>
+                    </tbody>
+                    <!--Table body-->
+                </table>
+                <!--Table-->
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+
+<footer>
+    <% include ../footer %>
+</footer>
+</html>
