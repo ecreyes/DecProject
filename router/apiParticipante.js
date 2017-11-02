@@ -9,10 +9,10 @@ module.exports = router;
 
 
 //GET objetivos
-router.get('/objetivos', function(req, res, next) {
+router.get('/participantes', function(req, res, next) {
     try {
-        models.escenario.findAll().then(function (objectives) {
-            res.json(objectives);
+        models.usuario_escenario.findAll().then(function (participante) {
+            res.json(participante);
         });
     } catch (ex) {
         console.error("Internal error:" + ex);
@@ -21,16 +21,17 @@ router.get('/objetivos', function(req, res, next) {
 });
 
 //POST objetivos
-router.post('/objetivos', function(req,res,next){
+router.post('/participantes', function(req,res,next){
     try{
         console.log(req.body);
+        console.log(req.user);
         var resultado=[];
-        models.escenario.create({
-            titulo: req.body.titulo,
-            descripcion: req.body.descripcion,
-            idSesion: req.body.sala
-        }).then(function (objectives) {
-            resultado.push(objectives);
+
+        models.usuario_escenario.create({
+            idUsuario: req.user.idUsuario,
+            idEscenario: req.body.escenario
+        }).then(function (participante) {
+            resultado.push(participante);
             res.json(resultado);
         });
         //No se maneja bien el tema del JOIN aun asi que solo se agrega en la tabla sesion :/

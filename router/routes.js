@@ -101,6 +101,9 @@ module.exports = function(app, passport) {
     app.get('/salas/:id', function (req,res) {
         res.redirect('/apiSesion/sesiones/'+req.params.id);
     });
+    app.get('/escenarios/:id', function (req,res) {
+        res.redirect('/apiEscenario/escenarios/'+req.params.id);
+    });
     app.get('/profile', isLoggedIn, function(req, res) {
         res.render('usuario/profile.html');
     });

@@ -71,21 +71,21 @@ myModule.controller("counterCtrl",['$scope','$timeout', function($scope,$timeout
 
 // Email Controller
 
-myModule.controller("objetivoCtrl", function($scope,$http) {
-    $scope.objetivo = [];
+myModule.controller("escenarioCtrl", function($scope,$http) {
+    $scope.escenario = [];
     $scope.formData = {};
-    $http.get('/apiObjetivo/objetivos')
+    $http.get('/apiEscenario/escenarios')
         .success(function(data) {
-            $scope.objetivo = data;
+            $scope.escenario = data;
             console.log(data)
         })
         .error(function(data) {
             console.log('Error: ' + data);
         });
-    $scope.crearObjetivo = function(){
-        $http.post('/apiObjetivo/objetivos', $scope.formData)
+    $scope.crearEscenario = function(){
+        $http.post('/apiEscenario/escenarios', $scope.formData)
             .success(function(data) {
-                $scope.objetivo.push(data[0]);
+                $scope.escenario.push(data[0]);
                 $scope.formData = {};
                 console.log(data);
             })
@@ -93,6 +93,7 @@ myModule.controller("objetivoCtrl", function($scope,$http) {
                 console.log('Error:' + data);
             });
     };
+
 
     $scope.correo = {};
     $scope.enviarCorreo = function(){

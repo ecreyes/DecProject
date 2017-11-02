@@ -117,7 +117,7 @@
                         </header>
                     </div>
                     <div class="col-4">
-                        <div class="container"  ng-controller="objetivoCtrl">
+                        <div class="container"  ng-controller="escenarioCtrl">
                             <!--Panel-->
                             <div class="card text-center">
                                 <div class="card-header secondary-color-dark white-text">
@@ -202,7 +202,7 @@
                     <p>Añade los escenarios</p>
                     <h2>Escenarios</h2>
                 </header>
-                <div class="row" ng-controller="objetivoCtrl">
+                <div class="row" ng-controller="escenarioCtrl">
                     <div class="col-4" >
                         <div class="container">
                             <!--Panel-->
@@ -226,7 +226,7 @@
                                             <option value="<%=idSesion%>"><%=idSesion%></option>
                                         </select>
                                         <p></p>
-                                        <button class="button special" ng-click="crearObjetivo()">Crear</button>
+                                        <button class="button special" ng-click="crearEscenario()">Crear</button>
                                     </form>
                                 </div>
                             </div>
@@ -244,6 +244,7 @@
                                     <th> id </th>
                                     <th> Titulo </th>
                                     <th> descripcion </th>
+                                    <th> inscribirse </th>
                                 </tr>
                                 </thead>
                                 <!--Table head-->
@@ -251,10 +252,11 @@
                                 <!--Table body-->
                                 <tbody>
                                 <div>
-                                    <tr ng-repeat="obj in objetivo">
+                                    <tr ng-repeat="obj in escenario">
                                         <td ng-if="obj.idSesion == '<%=idSesion%>'">{{obj.idEscenario}}</td>
                                         <td ng-if="obj.idSesion == '<%=idSesion%>'">{{obj.titulo}}</td>
                                         <td ng-if="obj.idSesion == '<%=idSesion%>'">{{obj.descripcion}}</td>
+                                        <td> <a  ng-if="obj.idSesion == '<%=idSesion%>'" href="/escenarios/{{obj.idEscenario}}" class="button special">Entrar</a></td>
                                     </tr>
                                 </div>
 

@@ -11,8 +11,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         username: {
         	type: DataTypes.STRING,
-        	unique: true,
-        	allowNull: true
+        	allowNull: false
         },
         password: {
         	type: DataTypes.STRING,
@@ -24,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
         	allowNull: true
         },
         registrado: DataTypes.BOOLEAN
-    }, {
+    }, /*{
         classMethods: {
         	associate: function(models){
                 //Usuario.hasMany(models.sesion, {foreignKey: 'idModerador'})
@@ -32,7 +31,7 @@ module.exports = function(sequelize, DataTypes) {
         	}
 
         }
-    });
+    }*/);
     return Usuario;
 };
 

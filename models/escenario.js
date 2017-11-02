@@ -26,7 +26,7 @@ module.exports = function(sequelize, DataTypes) {
         	allowNull: false
         },
         descripcion: DataTypes.TEXT
-    }, {
+    }, /*{
         classMethods: {
             associate: function(models){
                 //Usuario.hasMany(models.sesion, {foreignKey: 'idModerador'})
@@ -34,8 +34,9 @@ module.exports = function(sequelize, DataTypes) {
             }
 
         },
+
         timestamps: true
-    });
+    }*/);
     return Escenario;
 };
 

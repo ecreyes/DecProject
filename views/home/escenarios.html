@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html lang="en" ng-app="participanteApp">
+<head>
+    <title>Salas</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../css/main.css" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../js/participanteCtrl.js"></script>
+</head>
+<body class="subpage">
+
+<!-- Header -->
+<header id="header">
+    <div class="logo"><a href="index.html">Dec <span>Project</span></a></div>
+    <a href="#menu">Menu</a>
+</header>
+
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/sesiones">Salas</a></li>
+        <li><a href="/loginInvitado">Entrar como Invitado</a></li>
+        <li><a href="/login">Iniciar Sesión</a></li>
+        <li><a href="/signup">Registrarse</a></li>
+        <li><a href="/loginAdmin">Entrar como administrador</a></li>
+    </ul>
+</nav>
+
+<!-- One -->
+<section id="One" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+            <p>Accediste al escenario <%=titulo%></p>
+            <h2>Bienvenido</h2>
+        </header>
+    </div>
+</section>
+
+<section id="two" class="wrapper style2">
+    <body>
+
+
+    <div class="row" ng-controller="participanteCtrl">
+        <div class="col-4" >
+            <div class="container">
+                <!--Panel-->
+                <div class="card text-center" style="width: 22rem;">
+                    <div class="card-header primary-color white-text">
+                        Registrarse
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <%=idEscenario%>
+                            <select ng-model="formData.escenario" class="form-control">
+                                <option value="" disabled selected>Selecciona la sala</option>
+                                <option value="<%=idEscenario%>"><%=idEscenario%></option>
+                            </select>
+                            <p></p>
+                            <button class="button special" ng-click="crearParticipante()">Crear</button>
+                        </form>
+                    </div>
+                </div>
+                <!--/.Panel-->
+            </div>
+        </div>
+    </div>
+    <div class="container" ng-controller="votoCtrl">
+        <!--Table-->
+        <table class="table">
+
+            <!--Table head-->
+            <thead class="primary-color">
+            <tr class="text-white">
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Mecanismo</th>
+                <th>Resultado</th>
+                <th></th>
+            </tr>
+            </thead>
+            <!--Table head-->
+
+            <!--Table body-->
+            <tbody>
+            <tr ng-repeat="panel in decisiones">
+                <th>{{panel.idDecision}}</th>
+                <td>{{panel.nombre}}</td>
+                <td>{{panel.mecanismo}}</td>
+                <td>{{panel.resultado}}</td>
+                <td>            </td>
+            </tr>
+            </tbody>
+            <!--Table body-->
+        </table>
+        <!--Table-->
+
+    </div>
+
+    <div class="row" ng-controller="votoCtrl">
+        <div class="col-4">
+            <div class="container">
+                <!--Panel-->
+                <div class="card border-info mb-3" style="width: 22rem;">
+                    <div class="card-header">
+                        Votar
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <select ng-model="formData.participante" class="form-control">
+                                <option value="" disabled selected>Seleccione participante</option>
+                                <option
+                                        ng-repeat="panel in participante"
+                                        value="{{panel.idUsuario}}"
+                                >
+                                    {{panel.idUsuario}}
+                                </option>
+                            </select>
+                            <select ng-model="formData.decision" class="form-control">
+                                <option value="" disabled selected>Seleccione decision</option>
+                                <option
+                                        ng-repeat="panel in decisiones"
+                                        value="{{panel.idDecision}}"
+                                >
+                                    {{panel.nombre}}
+                                </option>
+                            </select>
+                            <select ng-model="formData.escenario" class="form-control">
+                                <option value="" disabled selected>Selecciona la sala</option>
+                                <option value="<%=idEscenario%>"><%=idEscenario%></option>
+                            </select>
+                            <div class="md-form">
+                                <label for="form2" >Prioridad</label>
+                                <input type="text" id="form2" class="form-control" ng-model="formData.prioridad">
+                            </div>
+
+                            <p></p>
+                            <div>
+                                <button  type="button" class="btn btn-dark" ng-click="crearVoto()">Votar</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <!--/.Panel-->
+            </div>
+        </div>
+    </body>
+</section>
+
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="container">
+        <ul class="icons">
+            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+        </ul>
+    </div>
+    <div class="copyright">
+        &copy; Untitled. All rights reserved.
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="../../js/jquery.min.js"></script>
+<script src="../../js/jquery.scrollex.min.js"></script>
+<script src="../../js/skel.min.js"></script>
+<script src="../../js/util.js"></script>
+<script src="../../js/main.js"></script>
+
+</body>
+</html>

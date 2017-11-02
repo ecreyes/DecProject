@@ -43,7 +43,9 @@ app.use(express.static('public'));
 app.use('/api', require('./router/api'));
 app.use('/apiSesion', require('./router/apiSesion'));
 app.use('/apiPanelAdmin', require('./router/apiPanelAdmin'));
-app.use('/apiObjetivo', require('./router/apiObjetivo'));
+app.use('/apiEscenario', require('./router/apiEscenario'));
+app.use('/apiParticipante', require('./router/apiParticipante'));
+app.use('/apiVotos', require('./router/apiVotos'));
 
 
 var servidor = http.createServer(app);

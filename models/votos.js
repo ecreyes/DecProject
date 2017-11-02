@@ -3,7 +3,7 @@
 module.exports = function(sequelize, DataTypes) {
     var Votos =
         sequelize.define("votos", {
-            /*
+
             idUsuario: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
@@ -12,7 +12,6 @@ module.exports = function(sequelize, DataTypes) {
                     key: 'idUsuario'
 
                 },
-                unique: true,
                 allowNull: false,
             },
             idEscenario: {
@@ -23,7 +22,6 @@ module.exports = function(sequelize, DataTypes) {
                     key: 'idEscenario'
 
                 },
-                unique: true,
                 allowNull: false,
             },
 
@@ -32,12 +30,11 @@ module.exports = function(sequelize, DataTypes) {
                 primaryKey: true,
                 references: {
                     model: 'decision',
-                    key: 'id'
+                    key: 'idDecision'
 
                 },
-                unique: true,
                 allowNull: false,
-            },*/
+            },
             prioridad: {
                 type: DataTypes.INTEGER,
                 allowNull: false

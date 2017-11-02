@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
     var Usuario_escenario = sequelize.define("usuario_escenario", {
-    	/*idUsuario: {
+    	idUsuario: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 references: {
@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
                     key: 'idUsuario'
 
                 },
-                unique: true,
+
                 allowNull: false,
             },
         idEscenario: {
@@ -21,9 +21,8 @@ module.exports = function(sequelize, DataTypes) {
                     key: 'idEscenario'
 
                 },
-                unique: true,
                 allowNull: false,
-            },
+            }/*,
         idSesion: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
@@ -37,13 +36,13 @@ module.exports = function(sequelize, DataTypes) {
             },*/
         
     }, {
-    	 classMethods: {
+    	 /*classMethods: {
             associate: function(models){
                 //Usuario.hasMany(models.sesion, {foreignKey: 'idModerador'})
                 Usuario_escenario.belongsToMany(models.decision, {through: 'votos'});
             }
 
-        },
+        },*/
         timestamps: true
     });
     return Usuario_escenario;
