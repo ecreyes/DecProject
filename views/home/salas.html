@@ -158,7 +158,11 @@
                                 <form id="formularioUsuario">
                                     <div class="input-group">
                                         <input id="usuario" class="form-control" placeholder="Nombre del Usuario">
-                                        <input id="idSesion"></input>
+                                        <!--<input id="idSesion"></input>-->
+                                        <select class="form-control" id="idSesion">
+                                            <option value="" disabled selected>Selecciona la sala</option>
+                                            <option value="<%=idSesion%>"><%=idSesion%></option>
+                                        </select>
                                         <span class="input-group-btn">
                         <button class="btn btn-primary" type="submit">Enviar</button>
                     </span>
