@@ -63,21 +63,22 @@ var io = socket.listen(servidor);
 
 var usuarios = [];
 io.on('connection', function(socket){
-    socket.on('nuevo usuario', function(usuario, callback){
+    socket.on('nuevo usuario', function(usuario,sesion, callback){
         if(usuarios.indexOf(usuario) != -1){
             callback(false);
         }
         else{
             callback(true);
             socket.usuario = usuario;
-            usuarios.push(usuario);
+            socket.sesion = sesion;
+            usuarios.push([usuario,sesion]);
             actualizarUsuarios();
-            io.emit('mensaje',{mensaje: 'se ha conectado', usuario: socket.usuario});
+            io.emit('mensaje',{mensaje: 'se ha conectado', usuario: socket.usuario,sesion: socket.sesion});
         }
     });
 
     socket.on('nuevo mensaje', function(mensaje){
-        io.emit('mensaje', {mensaje: mensaje, usuario: socket.usuario});
+        io.emit('mensaje', {mensaje: mensaje, usuario: socket.usuario,sesion:socket.sesion});
     });
 
     function actualizarUsuarios(){

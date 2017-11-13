@@ -158,6 +158,7 @@
                                 <form id="formularioUsuario">
                                     <div class="input-group">
                                         <input id="usuario" class="form-control" placeholder="Nombre del Usuario">
+                                        <input id="idSesion"></input>
                                         <span class="input-group-btn">
                         <button class="btn btn-primary" type="submit">Enviar</button>
                     </span>
@@ -292,6 +293,8 @@
 <script>
     $(function(){
         var socket = io.connect();
+        var sesion = $("#idSesion");
+        var id;
 
         var formularioUsuario = $("#formularioUsuario");
         var formularioChat = $("#formularioChat");
@@ -304,7 +307,7 @@
 
         formularioUsuario.submit(function(evento){
             evento.preventDefault();
-            socket.emit('nuevo usuario', usuario.val(), function(data){
+            socket.emit('nuevo usuario', usuario.val(),sesion.val(), function(data){
                 if(data){
                     $('#error').hide();
                     $('#seccionUsuario').hide();
@@ -316,13 +319,21 @@
                 }
             });
             usuario.val('');
+            id = sesion.val();
+            sesion.val('');
 
             socket.on('actualizarUsuarios', function(usuarios){
                 var html = '';
-
+                for (var i = 0; i < usuarios.length; i++) {
+                    if (usuarios[i][1]==id) {
+                        html += usuarios[i][0] + '<br />';;
+                    }
+                }
+                /*
                 usuarios.forEach(function(usuario){
                     html += usuario + '<br />';
                 });
+                */
 
                 listaUsuarios.html(html);
             });
@@ -334,7 +345,9 @@
             });
 
             socket.on('mensaje', function(data){
-                chat.append('<strong>' + data.usuario + '</strong> - ' + data.mensaje + '<br/>');
+                if(data.sesion==id){
+                    chat.append('<strong>' + data.usuario + '</strong> - ' + data.mensaje+ '<br/>');
+                }
             })
         })
     })
