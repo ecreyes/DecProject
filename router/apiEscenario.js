@@ -28,6 +28,7 @@ router.post('/escenarios', function(req,res,next){
         models.escenario.create({
             titulo: req.body.titulo,
             descripcion: req.body.descripcion,
+            estado: 0,
             idSesion: req.body.sala
         }).then(function (escenarios) {
             resultado.push(escenarios);

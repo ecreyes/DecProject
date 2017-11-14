@@ -24,7 +24,8 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         },
         descripcion: DataTypes.TEXT,
-        miembros: DataTypes.INTEGER
+        miembros: DataTypes.INTEGER,
+        estado: DataTypes.BOOLEAN
  	}, {
             
         timestamps: true

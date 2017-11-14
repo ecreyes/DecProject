@@ -25,7 +25,9 @@ module.exports = function(sequelize, DataTypes) {
         	unique: false,
         	allowNull: false
         },
-        descripcion: DataTypes.TEXT
+        descripcion: DataTypes.TEXT,
+        estado: DataTypes.BOOLEAN
+
     }, /*{
         classMethods: {
             associate: function(models){

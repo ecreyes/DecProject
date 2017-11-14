@@ -20,6 +20,27 @@ router.get('/votos', function(req, res, next) {
     }
 });
 
+
+
+router.post('/contarVotos', function(req, res, next) {
+    try {
+        console.log(req.body);
+        models.votos.count(
+            {where: {
+                idDecision: req.body.decision ,
+                idEscenario: req.body.escenario}}
+        ).then(function (voto) {
+            res.json(voto);
+        });
+    } catch (ex) {
+        console.error("Internal error:" + ex);
+        return next(ex);
+    }
+});
+
+
+
+
 //POST objetivos
 router.post('/votos', function(req,res,next){
     try{

@@ -14,6 +14,38 @@
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <script src="../../js/participanteCtrl.js"></script>
+
+
+    <style>
+        button {
+            border:1px solid #34740e; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px;font-family:arial, helvetica, sans-serif; padding: 10px 10px 10px 10px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+            text-decoration:none;
+            display:inline-block;
+            color: #FFFFFF;
+            padding: 8px 68px;
+            border-radius: 2px;
+            box-shadow: none;
+            font-weight: 700;
+            float: right;
+            text-transform: uppercase;
+            border: none;
+            font-family:arial, helvetica, sans-serif;
+            font-size: 17px;
+            text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
+            font-weight:bold;
+            margin-top: 30px;
+        }
+        button.dropdown-toggle {
+            float: none;
+            background: none;
+            color: #222;
+            text-shadow: none;
+            text-transform: capitalize;
+            padding: 5px 10px;
+        }
+        button.small { padding: 10px 48px; float: left; box-shadow: none;margin-top: 10px;}
+
+    </style>
 </head>
 <body class="subpage">
 
@@ -46,8 +78,10 @@
 </section>
 
 <section id="two" class="wrapper style2">
-    <body>
 
+
+
+    <body>
 
     <div class="row" ng-controller="participanteCtrl">
         <div class="col-4" >
@@ -73,40 +107,52 @@
             </div>
         </div>
     </div>
-    <div class="container" ng-controller="votoCtrl">
-        <!--Table-->
-        <table class="table">
 
-            <!--Table head-->
-            <thead class="primary-color">
-            <tr class="text-white">
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Mecanismo</th>
-                <th>Resultado</th>
-                <th></th>
-            </tr>
-            </thead>
-            <!--Table head-->
+    <div class="col-4">
+        <div class="container">
+            <!--Panel-->
+            <div class="card">
+                <div class="card-header secondary-color-dark lighten-1 white-text">
+                    Tiempo sala
+                </div>
+                <div class="card-body">
+                    <div ng-controller="counterCtrl" class="ng-scope">
 
-            <!--Table body-->
-            <tbody>
-            <tr ng-repeat="panel in decisiones">
-                <th>{{panel.idDecision}}</th>
-                <td>{{panel.nombre}}</td>
-                <td>{{panel.mecanismo}}</td>
-                <td>{{panel.resultado}}</td>
-                <td>            </td>
-            </tr>
-            </tbody>
-            <!--Table body-->
-        </table>
-        <!--Table-->
+                        <!--  Input Time -->
+                        <div ng-hide="counting">
+                            <div class="md-form row">
+                                <div class="md-form">
+                                    <label for="pinkForm-name">Ingresar minutos</label>
+                                    <input type="number" min=0 id="pinkForm-name" class="form-control" ng-model="counterMin">
+                                </div>
+                                <div class="md-form">
+                                    <label for="pinkForm-name2">Ingresar segundos</label>
+                                    <input type="number" min =-1 id="pinkForm-name2" class="form-control"
+                                           ng-change="updateTime()" ng-model="counterSec">
+                                </div>
+                            </div>
+                            <p></p>
+                            <button class="button special" ng-click="timeButtom()">Comenzar</button>
+                        </div>
+
+                        <!-- Counting Time  -->
+                        <div ng-show="counting">
+                            <h4 class="card-title">Tiempo {{counterMin}} : {{counterSec}}</h4>
+                            <button class="button special" ng-click="stop()">Detener</button>
+                        </div>
+
+
+                        <!--Angular Binding -->
+                    </div>
+                </div>
+            </div>
+            <!--/.Panel-->
+        </div>
 
     </div>
 
     <div class="row" ng-controller="votoCtrl">
-        <div class="col-4">
+        <div class="col-12">
             <div class="container">
                 <!--Panel-->
                 <div class="card border-info mb-3" style="width: 22rem;">
@@ -114,25 +160,50 @@
                         Votar
                     </div>
                     <div class="card-body">
-                        <form>
+                        <div>
+
                             <select ng-model="formData.participante" class="form-control">
                                 <option value="" disabled selected>Seleccione participante</option>
                                 <option
+
                                         ng-repeat="panel in participante"
                                         value="{{panel.idUsuario}}"
                                 >
                                     {{panel.idUsuario}}
                                 </option>
                             </select>
-                            <select ng-model="formData.decision" class="form-control">
-                                <option value="" disabled selected>Seleccione decision</option>
+
+                            <select  ng-model="formData.decision" class="form-control">
+                                <option  value="" disabled selected>Seleccione decision</option>
                                 <option
-                                        ng-repeat="panel in decisiones"
-                                        value="{{panel.idDecision}}"
+                                        ng-repeat="dec in decisiones"
+                                        value="{{dec.idDecision}}"
                                 >
-                                    {{panel.nombre}}
+                                    {{dec.nombre}}
+
+
                                 </option>
+
                             </select>
+                            <!--
+                            <ul>
+                                <li data-ng-repeat="dec in formData">{{dec}}</li>
+                            </ul>
+                            -->
+
+
+                            <section data-ng-repeat="dec1 in formData.decision">
+                                <ul  ng-repeat="dec0 in decisiones">
+                                    <tt ng-if="dec0.idDecision == dec1"
+                                    >Mecanismo: {{dec0.mecanismo}}
+                                        <p></p>
+                                        Resultado: {{dec0.resultado}}
+                                    </tt>
+                                </ul>
+                            </section>
+
+
+
                             <select ng-model="formData.escenario" class="form-control">
                                 <option value="" disabled selected>Selecciona la sala</option>
                                 <option value="<%=idEscenario%>"><%=idEscenario%></option>
@@ -153,6 +224,59 @@
                 <!--/.Panel-->
             </div>
         </div>
+
+            <div class="row" ng-controller="resultadosCtrl">
+                <div class="col-12">
+                    <div class="container">
+                        <!--Panel-->
+                        <div class="card border-info mb-3" style="width: 22rem;">
+                            <div class="card-header">
+                                Votar
+                            </div>
+                            <div class="card-body">
+                                <div>
+
+                                    <select  ng-model="formData.decision" class="form-control">
+                                        <option  value="" disabled selected>Seleccione decision</option>
+                                        <option
+                                                ng-repeat="dec in decisiones"
+                                                value="{{dec.idDecision}}"
+                                        >
+                                            {{dec.nombre}}
+
+
+                                        </option>
+
+                                    </select>
+                                    <!--
+                                    <ul>
+                                        <li data-ng-repeat="dec in formData">{{dec}}</li>
+                                    </ul>
+                                    -->
+
+                                    <select ng-model="formData.escenario" class="form-control">
+                                        <option value="" disabled selected>Selecciona la sala</option>
+                                        <option value="<%=idEscenario%>"><%=idEscenario%></option>
+                                    </select>
+
+                                    <p></p>
+                                    <div>
+                                        <button  type="button" class="btn btn-dark" ng-click="resultados()">Contar</button>
+
+                                    </div>
+                                    <p>Numero: {{retorno}}</p>
+
+
+                                    </form>
+                                </div>
+                            </div>
+                            <!--/.Panel-->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
     </body>
 </section>
 

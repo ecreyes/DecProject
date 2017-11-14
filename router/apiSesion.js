@@ -30,6 +30,7 @@ router.post('/sesiones', function(req,res,next){
                 titulo: req.body.titulo,
                 descripcion: req.body.descripcion,
                 miembros: req.body.miembros,
+                estado: 0,
                 idModerador:req.user.idUsuario
             }).then(function (sesions) {
                 resultado.push(sesions);
@@ -40,7 +41,8 @@ router.post('/sesiones', function(req,res,next){
                 titulo: req.body.titulo,
                 descripcion: req.body.descripcion,
                 miembros: req.body.miembros,
-                idModerador:2
+                idModerador:2,
+                estado: 0
             }).then(function (sesions) {
                 resultado.push(sesions);
                 res.json(resultado);
